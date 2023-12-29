@@ -1,0 +1,79 @@
+{
+	"name": "Java",
+	"type": "java",
+	"request": "launch",
+	"stopOnEntry": true,
+	"preLaunchTask": "build",
+	"jdkPath": "${env:JAVA_HOME}/bin",
+	"sourcePaths": ["${workspaceRoot}/src"],
+	"cwd": "${workspaceRoot}",
+	"options": [
+	  "-classpath",
+	  "${workspaceRoot}/bin"	  
+	],
+	"configurations": [
+		{
+			"type": "java",
+			"name": "AnnealingHeuristikZentrum",
+			"request": "launch",
+			"mainClass": "lauf.AnnealingHeuristikZentrum",
+			"projectName": "bwinf24-2_14fd160a"
+		},
+		{
+			"type": "java",
+			"name": "Annealingsuche",
+			"request": "launch",
+			"mainClass": "lauf.Annealingsuche",
+			"projectName": "bwinf24-2_14fd160a"
+		},
+		{
+			"type": "java",
+			"name": "Duggssuche",
+			"request": "launch",
+			"mainClass": "lauf.Duggssuche",
+			"projectName": "bwinf24-2_14fd160a"
+		},
+		{
+			"type": "java",
+			"name": "GierigsucheHeuristikZentrum",
+			"request": "launch",
+			"mainClass": "lauf.GierigsucheHeuristikZentrum",
+			"projectName": "bwinf24-2_14fd160a"
+		},
+		{
+			"type": "java",
+			"name": "Popssuche",
+			"request": "launch",
+			"mainClass": "lauf.Popssuche",
+			"projectName": "bwinf24-2_14fd160a"
+		},
+		{
+			"type": "java",
+			"name": "GierigsucheMitBlasekosten",
+			"request": "launch",
+			"mainClass": "lauf.GierigsucheMitBlasekosten",
+			"projectName": "bwinf24-2_14fd160a"
+		},
+		{
+			"type": "java",
+			"name": "Gierigsuche",
+			"request": "launch",
+			"mainClass": "lauf.Gierigsuche",
+			"projectName": "bwinf24-2_14fd160a"
+		},
+		{
+			"type": "java",
+			"name": "Tiefensuche",
+			"request": "launch",
+			"mainClass": "lauf.Tiefensuche",
+			"projectName": "bwinf24-2_14fd160a"
+		},
+		{
+			"type": "java",
+			"name": "temp",
+			"request": "launch",
+			"mainClass": "lauf.temp",
+			"projectName": "bwinf24-2_14fd160a"
+		}
+	]
+  }
