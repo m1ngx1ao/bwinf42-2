@@ -1,3 +1,51 @@
+# Design
+
+``` mermaid
+classDiagram
+    class Schulhof {
+    }
+    class BlaseOp {
+    }
+    BlaseOp ..> Schulhof : Op auf
+    class Knoten {
+    }
+    Knoten o-- "0..1" BlaseOp : letzteOp
+    Knoten o-- "1" Schulhof : schulhof
+    Knoten -- "0..1" Knoten : vorgaenger
+    class Optimierer {
+        <<Abstract>>
+    }
+    Optimierer -- "1" Knoten : besterKnoten
+    Optimierer -- "*" BlaseOp : blaseOps
+    class Greedy {
+    }
+    Greedy --|> Optimierer
+    class Annealing {
+    }
+    Annealing --|> Optimierer
+    class Strategie {
+        <<Interface>>
+    }
+    Optimierer -- "1" Strategie : hat
+    class Lauf {
+    }
+    Optimierer "1" -- "*" Lauf
+    class Tiefensuche {
+    }
+    Tiefensuche --|> Lauf
+    class Gierigsuche {
+    }
+    Gierigsuche --|> Lauf
+    class anonym {
+    }
+    anonym --* Tiefensuche
+    anonym --> Strategie
+    class anonym {
+    }
+    anonym --* Gierigsuche
+    anonym --> Strategie
+```
+
 # Ergebnisse
 
 Jeder der unteren Laeufe ist so parametrisiert, dass er ca. 500.000 Blase-Operationen simuliert und
