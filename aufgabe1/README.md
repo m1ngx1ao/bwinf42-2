@@ -2,48 +2,51 @@
 
 ``` mermaid
 classDiagram
-    class Schulhof {
-    }
-    class BlaseOp {
-    }
-    BlaseOp ..> Schulhof : Op auf
-    class Knoten {
-    }
-    Knoten o-- "0..1" BlaseOp : letzteOp
-    Knoten o-- "1" Schulhof : schulhof
-    Knoten -- "0..1" Knoten : vorgaenger
-    class Optimierer {
-        <<Abstract>>
-    }
-    Optimierer -- "1" Knoten : besterKnoten
-    Optimierer -- "*" BlaseOp : blaseOps
-    class Greedy {
-    }
-    Greedy --|> Optimierer
-    class Annealing {
-    }
-    Annealing --|> Optimierer
-    class Strategie {
-        <<Interface>>
-    }
-    Optimierer -- "1" Strategie : hat
-    class Lauf {
-    }
-    Optimierer "1" -- "*" Lauf
-    class Tiefensuche {
-    }
-    Tiefensuche --|> Lauf
-    class Gierigsuche {
-    }
-    Gierigsuche --|> Lauf
-    class anonym {
-    }
-    anonym --* Tiefensuche
-    anonym --> Strategie
-    class anonym {
-    }
-    anonym --* Gierigsuche
-    anonym --> Strategie
+	namespace Modell {
+		class Schulhof {
+		}
+		class BlaseOp {
+		}
+	}
+	BlaseOp ..> Schulhof : operiert auf
+	namespace Optimierung {
+		class Knoten {
+		}
+		class Optimierer {
+			<<Abstract>>
+		}
+		class GierigOptimierer {
+		}
+		class AnnealingOptimierer {
+		}
+		class Strategie {
+			<<Interface>>
+		}
+	}
+	Knoten --> "0..1" BlaseOp : letzte
+	Knoten o-- Schulhof
+	Knoten --> "0..1" Knoten : vorgaenger
+	Optimierer -- Knoten : bester
+	Optimierer --> "*" BlaseOp : fuehrt aus
+	GierigOptimierer --|> Optimierer
+	AnnealingOptimierer --|> Optimierer
+	Optimierer o-- Strategie
+	namespace Lauf {
+		class LaufClass["Lauf"] {
+			<<Abstract>>
+		}
+		class XYZ-Suche {
+		}
+		class XYZ-Suche-anonymous["Strategie"] {
+			<<anonymous>>
+		}
+	}
+	Optimierer <-- "*" LaufClass
+	XYZ-Suche --|> LaufClass
+	XYZ-Suche-anonymous --* XYZ-Suche
+	XYZ-Suche-anonymous --|> Strategie
+	XYZ-Suche --> "0..1" GierigOptimierer
+	XYZ-Suche --> "0..1" AnnealingOptimierer
 ```
 
 # Ergebnisse
