@@ -13,9 +13,9 @@ public abstract class Optimierer {
 	protected double optimierungsdauer;
 	protected int zahlBlaseOps;
 	protected int maxSchritttiefe;
+	protected Knoten start;
 	protected Knoten besterKnoten;
 
-	protected Knoten initial;
 	protected Strategie strategie;
 
 	protected int budgetSchritttiefe;
@@ -33,7 +33,7 @@ public abstract class Optimierer {
 	protected Set<String> gesehen;
 	
 	Optimierer(int breite, int hoehe, Strategie strategie) {
-		initial = new Knoten(new Schulhof(breite, hoehe));
+		start = new Knoten(new Schulhof(breite, hoehe));
 		blaseOps = BlaseOp.holeVeraenderndeOps(breite, hoehe);
 		this.strategie = strategie;
 		// optionale Beschraenkungen koennen spaeter per setze-Methode

@@ -54,17 +54,17 @@ public class AnnealingOptimierer extends Optimierer {
 		zahlBearbeitungZufall = 0;
 		zahlBearbeitungPrio = 0;
 		gesehen = new HashSet<String>();
-		gesehen.add(initial.holeSchulhof().holeRepraesentant());
+		gesehen.add(start.holeSchulhof().holeRepraesentant());
 		PriorityQueue<Knoten> prioTodo = new PriorityQueue<Knoten>();
 		List<Knoten> zufallTodo = new ArrayList<Knoten>();
 		// nur zur Ueberpruefung auf identische Knoten
 		// => kein equals/hashCode Override fuer Knoten notwendig
 		Set<Knoten> bearbeiteteKnoten = new HashSet<Knoten>();
 
-		besterKnoten = initial;
-		if (initial.holeSchritt() < budgetSchritttiefe) {
-			prioTodo.add(initial);
-			zufallTodo.add(initial);
+		besterKnoten = start;
+		if (start.holeSchritt() < budgetSchritttiefe) {
+			prioTodo.add(start);
+			zufallTodo.add(start);
 		}
 		Instant zeitDavor = Instant.now();
 

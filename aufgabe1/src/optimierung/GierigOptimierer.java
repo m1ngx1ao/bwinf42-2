@@ -17,11 +17,11 @@ public class GierigOptimierer extends Optimierer {
 	public void tue() {
 		zahlBlaseOps = 0;
 		gesehen = new HashSet<String>();
-		gesehen.add(initial.holeSchulhof().holeRepraesentant());
+		gesehen.add(start.holeSchulhof().holeRepraesentant());
 		PriorityQueue<Knoten> todo = new PriorityQueue<Knoten>();
-		besterKnoten = initial;
-		if (initial.holeSchritt() < budgetSchritttiefe) {
-			todo.add(initial);
+		besterKnoten = start;
+		if (start.holeSchritt() < budgetSchritttiefe) {
+			todo.add(start);
 		}
 		Instant zeitDavor = Instant.now();
 		while (!todo.isEmpty() && zahlBlaseOps < budgetBlaseOp) {
