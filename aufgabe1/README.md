@@ -1,52 +1,92 @@
 # Design
+Um die Abbildung zu vereinfachen, ist im UML Klassendiagramm Folgendes weggelassen:
+* Hole-Methoden: durch die Attributauflistung nicht zwingend erforderlich
+* Override von Standard-Methoden (equals, hashCode, toString): im Modell standardmaessig durchgefuehrt aber von der Optimierung nicht benoetigt
 
 ``` mermaid
 classDiagram
 	namespace Modell {
 		class Schulhof {
+			-maxLaub : int
+			-maxFeldX : int
+			-maxFeldY : int
+			-breite : int
+			-hoehe : int
+			-repraesentant : String
+			-berechneAttribute()
+			+Schulhof(breite : int, hoehe : int)
+			+Schulhof(breite : int, hoehe : int, felderListe : int[])
+			~Schulhof(felder : int[][])
+			+existiertFeld(x : int, y : int) boolean
 		}
 		class BlaseOp {
+			-x : int
+			-y : int
+			-dx : int
+			-dy : int
+			+tue(davor : Schulhof) Schulhof
+			+holeVeraenderndeOps(breite : int, hoehe : int) List~BlaseOp~$
 		}
 	}
-	BlaseOp ..> Schulhof : operiert auf
 	namespace Optimierung {
 		class Knoten {
+			-schritt : int
+			-prioritaet : int
+			+setzePrioritaet(int)
+
 		}
 		class Optimierer {
 			<<Abstract>>
+			#optimierungsdauer : double
+			#zahlBlaseOps : int
+			#maxSchritttiefe : int
+			#budgetSchritttiefe : int
+			#budgetBlaseOp : int
+			#gesehen : Set~String~
+			+setzeBudgetBlaseOp(int)
+			+setzeBudgetSchritttiefe(int)
+			+tue()*
 		}
 		class GierigOptimierer {
+			-tueNaechsten(PriorityQueue~Knoten~)
 		}
 		class AnnealingOptimierer {
+			-zufallFaktor : double
+			-zufallProb : double
+			-zahlBearbeitungZufall : int
+			-zahlBearbeitungPrio : int
+			-tueNaechsten(PriorityQueue~Knoten~, List~Knoten~, Set~Knoten~)
 		}
 		class Strategie {
 			<<Interface>>
+			+berechnePrioritaet(Knoten) int
 		}
 	}
-	Knoten --> "0..1" BlaseOp : letzte
+	Knoten --> "0..1" BlaseOp : letzteOp
 	Knoten o-- Schulhof
-	Knoten --> "0..1" Knoten : vorgaenger
-	Optimierer -- Knoten : bester
-	Optimierer --> "*" BlaseOp : fuehrt aus
+	Knoten "0..1" <-- Knoten : vorgaenger
+	Optimierer --> Knoten : bester
+	Optimierer --> Knoten : initial
+	Optimierer ..> "*" BlaseOp : fuehrt aus
 	GierigOptimierer --|> Optimierer
 	AnnealingOptimierer --|> Optimierer
 	Optimierer o-- Strategie
 	namespace Lauf {
 		class LaufClass["Lauf"] {
 			<<Abstract>>
+			#outputErgebnis(Optimierer, name : String)$
 		}
 		class XYZ-Suche {
+			+main(args : String[])$
 		}
 		class XYZ-Suche-anonymous["Strategie"] {
 			<<anonymous>>
 		}
 	}
-	Optimierer <-- "*" LaufClass
+	XYZ-Suche "*" --> Optimierer
 	XYZ-Suche --|> LaufClass
 	XYZ-Suche-anonymous --* XYZ-Suche
-	XYZ-Suche-anonymous --|> Strategie
-	XYZ-Suche --> "0..1" GierigOptimierer
-	XYZ-Suche --> "0..1" AnnealingOptimierer
+	XYZ-Suche-anonymous ..|> Strategie
 ```
 
 # Ergebnisse

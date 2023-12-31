@@ -41,8 +41,10 @@ public class Knoten implements Comparable<Knoten>{
 	 * (1) Knoten die Strategie nicht kennen muss,
 	 * (2) der Vergleich effizient ist (manche Strategien
 	 *     koennten aufwaendiger zu berechnen sein)
+	 * 
+	 * Public um darauf Tests machen zu koennen
 	 */
-	public void setztePrioritaet(int prioritaet) {
+	public void setzePrioritaet(int prioritaet) {
 		this.prioritaet = prioritaet;
 	}
 

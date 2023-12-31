@@ -126,7 +126,7 @@ public class BlaseOp {
 	 * Verteilung eine Veraenderung hervorruft. Daher wird die Liste
 	 * anhand mehrerer Op-Simulationen erstellt.
 	 */
-	public static List<BlaseOp> holeVeraenderndeOps(int hoehe, int breite) {
+	public static List<BlaseOp> holeVeraenderndeOps(int breite, int hoehe) {
 		LinkedList<BlaseOp> ergebnis = new LinkedList<BlaseOp>();
 		Schulhof s = new Schulhof(breite, hoehe);
 		for (int dx = -1; dx <= 1; dx++) {

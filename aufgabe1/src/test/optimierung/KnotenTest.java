@@ -19,15 +19,15 @@ public class KnotenTest {
 		Schulhof ende = op2.tue(dann);
 		Knoten ke = new Knoten(ende, kd, op2);
 		assertEquals(2, ke.holeSchritt());
-		assertEquals(anfang + "\n" + op1 + "\n" + dann + "\n" + op2 + "\n" + ende, ke.toString());
+		assertEquals(anfang + "\nOp 1: " + op1 + "\n" + dann + "\nOp 2: " + op2 + "\n" + ende, ke.toString());
 	}
 
 	@Test
 	void knotenHoehererPrioritaetKommtZuerst() {
 		Knoten k2 = new Knoten(null);
-		k2.setztePrioritaet(2);
+		k2.setzePrioritaet(2);
 		Knoten k5 = new Knoten(null);
-		k5.setztePrioritaet(5);
+		k5.setzePrioritaet(5);
 		// Abarbeitungsreihenfolge soll sein: k5 < k2
 		assertTrue(k5.compareTo(k2) < 0);
 		assertTrue(k2.compareTo(k5) > 0);

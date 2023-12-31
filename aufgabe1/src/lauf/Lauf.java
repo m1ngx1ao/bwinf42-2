@@ -5,9 +5,9 @@ import java.io.IOException;
 
 import optimierung.*;
 
-public class Lauf {
-    public static void outputErgebnis(Optimierer o, String simpleName) throws IOException {
-        FileWriter fw = new FileWriter("aufgabe1/logs/" + simpleName + ".log");
+public abstract class Lauf {
+    protected static void outputErgebnis(Optimierer o, String name) throws IOException {
+        FileWriter fw = new FileWriter("aufgabe1/logs/" + name + ".log");
 
 		fw.write("Optimierungsdauer: " + String.format("%.3f", o.holeOptimierungsdauer()) + " secs");
 		fw.write("\nGesehene einzigartige Schulhoefe: " + o.holeZahlEinzigartigerSchulhoefe());

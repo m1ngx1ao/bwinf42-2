@@ -2,6 +2,8 @@ package modell;
 
 public class Schulhof {
 	private int[][] felder;
+	private int breite;
+	private int hoehe;
 
 	// kalkulierte Attribute
 	private int maxLaub;
@@ -9,19 +11,9 @@ public class Schulhof {
 	private int maxFeldY;
 	private String repraesentant;
 
-	public int holeBreite() {
-		return felder[0].length;
-	}
-	
-	public int holeHoehe() {
-		return felder.length;
-	}
-
-	public boolean existiertFeld(int x, int y) {
-		return x >= 0 && x < holeBreite() && y >= 0 && y < holeHoehe();
-	}
-
 	public Schulhof(int breite, int hoehe) {
+		this.breite = breite;
+		this.hoehe = hoehe;
 		felder = new int[hoehe][breite];
 		for (int x = 0; x < breite; x++) {
 			for (int y = 0; y < hoehe; y++) {
@@ -36,6 +28,8 @@ public class Schulhof {
 	 *   damit keine Aenderungen am Schulhof von aussen moeglich sind
 	 */
 	public Schulhof(int breite, int hoehe, int[] felderListe) {
+		this.breite = breite;
+		this.hoehe = hoehe;
 		felder = new int[hoehe][breite];
 		for (int y = 0; y < hoehe; y++) {
 			for (int x = 0; x < breite; x++) {
@@ -52,10 +46,20 @@ public class Schulhof {
 	 */
 	Schulhof(int[][] felder) {
 		this.felder = felder;
+		this.breite = felder[0].length;
+		this.hoehe = felder.length;
 		berechneAttribute();
 	}
 
 	// GETTER
+
+	public int holeBreite() {
+		return breite;
+	}
+	
+	public int holeHoehe() {
+		return hoehe;
+	}
 
 	public int holeLaub(int x, int y) {
 		return felder[y][x];
@@ -116,6 +120,14 @@ public class Schulhof {
 		}
 		return repraesentant.equals(((Schulhof) other).repraesentant);
 	}
+
+	// WEITERE
+
+	public boolean existiertFeld(int x, int y) {
+		return x >= 0 && x < holeBreite() && y >= 0 && y < holeHoehe();
+	}
+
+	// GIERIGE ATTRIBUTBERECHNUNG (zwecks Effizienz)
 
 	/**
 	 * Immer am Ende des Konstruktors aufgerufen. Berechnet alle

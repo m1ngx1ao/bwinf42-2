@@ -32,9 +32,9 @@ public abstract class Optimierer {
 	 */
 	protected Set<String> gesehen;
 	
-	public Optimierer(int breite, int hoehe, Strategie strategie) {
+	Optimierer(int breite, int hoehe, Strategie strategie) {
 		initial = new Knoten(new Schulhof(breite, hoehe));
-		blaseOps = BlaseOp.holeVeraenderndeOps(hoehe, breite);
+		blaseOps = BlaseOp.holeVeraenderndeOps(breite, hoehe);
 		this.strategie = strategie;
 		// optionale Beschraenkungen koennen spaeter per setze-Methode
 		// angegeben werden. Per default, hier keine Beschraenkung (also "unendlich")
@@ -67,11 +67,11 @@ public abstract class Optimierer {
         return maxSchritttiefe;
     }
 
-    public void setzteBudgetSchritttiefe(int tiefe) {
+    public void setzeBudgetSchritttiefe(int tiefe) {
 		this.budgetSchritttiefe = tiefe;
     }
 
-	public void setzteBudgetBlaseOp(int blaseop) {
+	public void setzeBudgetBlaseOp(int blaseop) {
 		this.budgetBlaseOp = blaseop;
 	}
 

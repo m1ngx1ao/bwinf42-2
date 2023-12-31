@@ -45,7 +45,7 @@ public class GierigOptimierer extends Optimierer {
 					besterKnoten = naechster;
 				}
 				if (naechster.holeSchritt() < budgetSchritttiefe) {
-					naechster.setztePrioritaet(strategie.berechnePrioritaet(naechster));
+					naechster.setzePrioritaet(strategie.berechnePrioritaet(naechster));
 					todo.add(naechster);
 				}
 			}

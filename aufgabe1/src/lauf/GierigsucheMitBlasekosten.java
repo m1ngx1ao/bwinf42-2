@@ -14,7 +14,7 @@ public class GierigsucheMitBlasekosten extends Lauf {
 				return k.holeSchulhof().holeMaxLaub() - BLASEKOSTEN * k.holeSchritt();
 			}
 		});
-		o.setzteBudgetBlaseOp(500000);
+		o.setzeBudgetBlaseOp(500000);
 
 		o.tue();
 

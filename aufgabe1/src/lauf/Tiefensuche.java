@@ -14,7 +14,7 @@ public class Tiefensuche extends Lauf {
 				return k.holeSchritt();
 			}
 		});
-		o.setzteBudgetSchritttiefe(BUDGET_SCHRITTTIEFE);
+		o.setzeBudgetSchritttiefe(BUDGET_SCHRITTTIEFE);
 
 		o.tue();
 

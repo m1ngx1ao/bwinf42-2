@@ -24,7 +24,7 @@ public class AnnealingHeuristikZentrum extends Lauf {
 				return res;
 			}
 		});
-		o.setzteBudgetBlaseOp(500000);
+		o.setzeBudgetBlaseOp(500000);
 
 		o.tue();
 

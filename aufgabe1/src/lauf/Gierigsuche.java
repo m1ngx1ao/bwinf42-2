@@ -12,7 +12,7 @@ public class Gierigsuche extends Lauf {
 				return k.holeSchulhof().holeMaxLaub();
 			}
 		});
-		o.setzteBudgetBlaseOp(500000);
+		o.setzeBudgetBlaseOp(500000);
 
 		o.tue();
 

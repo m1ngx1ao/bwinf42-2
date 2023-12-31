@@ -57,6 +57,8 @@ public class AnnealingOptimierer extends Optimierer {
 		gesehen.add(initial.holeSchulhof().holeRepraesentant());
 		PriorityQueue<Knoten> prioTodo = new PriorityQueue<Knoten>();
 		List<Knoten> zufallTodo = new ArrayList<Knoten>();
+		// nur zur Ueberpruefung auf identische Knoten
+		// => kein equals/hashCode Override fuer Knoten notwendig
 		Set<Knoten> bearbeiteteKnoten = new HashSet<Knoten>();
 
 		besterKnoten = initial;
@@ -107,7 +109,7 @@ public class AnnealingOptimierer extends Optimierer {
 					besterKnoten = naechster;
 				}
 				if (naechster.holeSchritt() < budgetSchritttiefe) {
-					naechster.setztePrioritaet(strategie.berechnePrioritaet(naechster));
+					naechster.setzePrioritaet(strategie.berechnePrioritaet(naechster));
 					prioTodo.add(naechster);
 					zufallTodo.add(naechster);
 				}
