@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import modell.BlaseOp;
+import modell.Feld;
 import modell.Schulhof;
 
 public abstract class Optimierer {
@@ -31,9 +32,13 @@ public abstract class Optimierer {
 	 * weiter betrachtet werden muessen.
 	 */
 	protected Set<String> gesehen;
-	
-	Optimierer(int breite, int hoehe, Strategie strategie) {
-		start = new Knoten(new Schulhof(breite, hoehe));
+
+	/**
+	 * @param zielfeld Null wenn kein Zielfeld fest vorgegeben ist, sondern nur
+	 * ein beliebiges Innenhoffeld den Maximalwert haben darf.
+	 */
+	Optimierer(int breite, int hoehe, Strategie strategie, Feld zielfeld) {
+		start = new Knoten(new Schulhof(breite, hoehe, zielfeld));
 		blaseOps = BlaseOp.holeVeraenderndeOps(breite, hoehe);
 		this.strategie = strategie;
 		// optionale Beschraenkungen koennen spaeter per setze-Methode

@@ -10,7 +10,7 @@ import optimierung.Knoten;
 public class KnotenTest {
 	@Test
 	void dreiKnotenKreiertStringZeigtKette() {
-		Schulhof anfang = new Schulhof(3, 1);
+		Schulhof anfang = new Schulhof(3, 1, null);
 		Knoten ka = new Knoten(anfang);
 		BlaseOp op1 = new BlaseOp(2, 0, -1, 0);
 		Schulhof dann = op1.tue(anfang);

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import modell.BlaseOp;
+import modell.Feld;
 import modell.Schulhof;
 
 public class SchulhofBewertungTest {
@@ -16,7 +17,7 @@ public class SchulhofBewertungTest {
 			1, 2, 3, 4,
 			5, 6, 7, 8,
 			9, 10, 100, 12
-		});
+		}, null);
 	}
 	
 	/**
@@ -39,6 +40,24 @@ public class SchulhofBewertungTest {
 		Schulhof act = new BlaseOp(3, 2, -1, 0).tue(cut);
 		assertEquals(16, act.holeMaxLaub());
 		assertEquals(1, act.holeMaxFeldX());
+		assertEquals(1, act.holeMaxFeldY());
+	}
+	
+	/**
+	 * Stelle sicher, dass max-Laub nur vom Zielfeld genommen wird,
+	 * auch nach Blase-Operation (d.h. der erstellte Schulhoft
+	 * uebernimmt das Zielfeld des Vorgaengers).
+	 */
+	@Test
+	void schulhofMitZielfeldMaxLaubFeldKorrekt() {
+		cut = new Schulhof(4, 3, new int[] {
+			1, 2, 3, 4,
+			5, 6, 7, 8,
+			9, 10, 100, 12
+		}, new Feld(2, 1));
+		Schulhof act = new BlaseOp(3, 2, -1, 0).tue(cut);
+		assertEquals(7, act.holeMaxLaub());
+		assertEquals(2, act.holeMaxFeldX());
 		assertEquals(1, act.holeMaxFeldY());
 	}
 }

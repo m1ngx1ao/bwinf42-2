@@ -14,6 +14,48 @@
 	"configurations": [
 		{
 			"type": "java",
+			"name": "Tiefensuche",
+			"request": "launch",
+			"mainClass": "lauf.Tiefensuche",
+			"projectName": "bwinf42-2_14fdf746"
+		},
+		{
+			"type": "java",
+			"name": "GierigsucheHeuristikZentrum",
+			"request": "launch",
+			"mainClass": "lauf.GierigsucheHeuristikZentrum",
+			"projectName": "bwinf42-2_14fdf746"
+		},
+		{
+			"type": "java",
+			"name": "Annealingsuche",
+			"request": "launch",
+			"mainClass": "lauf.Annealingsuche",
+			"projectName": "bwinf42-2_14fdf746"
+		},
+		{
+			"type": "java",
+			"name": "Gierigsuche",
+			"request": "launch",
+			"mainClass": "lauf.Gierigsuche",
+			"projectName": "bwinf42-2_14fdf746"
+		},
+		{
+			"type": "java",
+			"name": "AnnealingHeuristikZentrum",
+			"request": "launch",
+			"mainClass": "lauf.AnnealingHeuristikZentrum",
+			"projectName": "bwinf42-2_14fdf746"
+		},
+		{
+			"type": "java",
+			"name": "GierigsucheMitBlasekosten",
+			"request": "launch",
+			"mainClass": "lauf.GierigsucheMitBlasekosten",
+			"projectName": "bwinf42-2_14fdf746"
+		},
+		{
+			"type": "java",
 			"name": "AnnealingHeuristikZentrum",
 			"request": "launch",
 			"mainClass": "lauf.AnnealingHeuristikZentrum",

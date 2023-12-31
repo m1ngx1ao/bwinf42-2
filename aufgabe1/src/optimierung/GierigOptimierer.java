@@ -6,11 +6,12 @@ import java.time.Duration;
 import java.time.Instant;
 
 import modell.BlaseOp;
+import modell.Feld;
 import modell.Schulhof;
 
 public class GierigOptimierer extends Optimierer {
-	public GierigOptimierer(int breite, int hoehe, Strategie strategie) {
-		super(breite, hoehe, strategie);
+	public GierigOptimierer(int breite, int hoehe, Strategie strategie, Feld zielfeld) {
+		super(breite, hoehe, strategie, zielfeld);
 	}
 
 	@Override

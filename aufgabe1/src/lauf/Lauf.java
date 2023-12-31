@@ -3,11 +3,13 @@ package lauf;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import modell.Feld;
 import optimierung.*;
 
 public abstract class Lauf {
-    protected static void outputErgebnis(Optimierer o, String name) throws IOException {
-        FileWriter fw = new FileWriter("aufgabe1/logs/" + name + ".log");
+    protected static void outputErgebnis(Optimierer o, String name, Feld zielfeld) throws IOException {
+		String zielfeldName = (zielfeld != null) ? (zielfeld.holeX() + "-" + zielfeld.holeY() + "/") : "beliebig";
+        FileWriter fw = new FileWriter("aufgabe1/logs/" + zielfeldName + name + ".log");
 
 		fw.write("Optimierungsdauer: " + String.format("%.3f", o.holeOptimierungsdauer()) + " secs");
 		fw.write("\nGesehene einzigartige Schulhoefe: " + o.holeZahlEinzigartigerSchulhoefe());

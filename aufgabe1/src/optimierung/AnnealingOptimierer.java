@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import modell.BlaseOp;
+import modell.Feld;
 import modell.Schulhof;
 
 /**
@@ -35,8 +36,8 @@ public class AnnealingOptimierer extends Optimierer {
 	 * nur noch halb so gross
 	 */
 	public AnnealingOptimierer(double zufallProbAnfang, int zufallHalbiertNach,
-			int breite, int hoehe, Strategie strategie) {
-		super(breite, hoehe, strategie);
+			int breite, int hoehe, Strategie strategie, Feld zielfeld) {
+		super(breite, hoehe, strategie, zielfeld);
 		this.zufallProb = zufallProbAnfang;
 		this.zufallFaktor = Math.pow(2, (-1.0 / zufallHalbiertNach));
 	}

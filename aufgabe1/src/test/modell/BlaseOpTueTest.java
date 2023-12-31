@@ -13,7 +13,7 @@ public class BlaseOpTueTest {
 
 	@BeforeEach
 	void setUp() {
-		davor = new Schulhof(5, 3);
+		davor = new Schulhof(5, 3, null);
 	}
 	
 	/**

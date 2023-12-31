@@ -115,7 +115,7 @@ public class BlaseOp {
 				neueFelder[ay][ax] = aLaubZuVerteilen;
 			}
 		}
-		return new Schulhof(neueFelder);
+		return new Schulhof(neueFelder, davor.holeZielfeld());
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class BlaseOp {
 	 */
 	public static List<BlaseOp> holeVeraenderndeOps(int breite, int hoehe) {
 		LinkedList<BlaseOp> ergebnis = new LinkedList<BlaseOp>();
-		Schulhof s = new Schulhof(breite, hoehe);
+		Schulhof s = new Schulhof(breite, hoehe, null);
 		for (int dx = -1; dx <= 1; dx++) {
 			for (int dy = -1 + Math.abs(dx); dy <= 1 - Math.abs(dx); dy += 2) {
 				for (int y = 0; y < hoehe; y++) {

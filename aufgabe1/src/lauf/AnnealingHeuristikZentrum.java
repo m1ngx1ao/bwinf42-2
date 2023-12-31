@@ -2,6 +2,7 @@ package lauf;
 
 import java.io.IOException;
 
+import modell.Feld;
 import optimierung.*;
 
 /**
@@ -12,6 +13,8 @@ import optimierung.*;
  */
 public class AnnealingHeuristikZentrum extends Lauf {
 	public static void main(String[] args) throws IOException {
+		Feld zielfeld = new Feld(2, 1);
+		//Feld zielfeld = null;
 		Optimierer o = new AnnealingOptimierer(0.4, 5000, 5, 5, new Strategie() {
 			@Override
 			public int berechnePrioritaet(Knoten k) {
@@ -23,11 +26,11 @@ public class AnnealingHeuristikZentrum extends Lauf {
 				}
 				return res;
 			}
-		});
+		}, zielfeld);
 		o.setzeBudgetBlaseOp(500000);
 
 		o.tue();
 
-		Lauf.outputErgebnis(o, AnnealingHeuristikZentrum.class.getSimpleName());
+		Lauf.outputErgebnis(o, AnnealingHeuristikZentrum.class.getSimpleName(), zielfeld);
 	}
 }
