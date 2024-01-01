@@ -31,6 +31,6 @@ public class GierigsucheHeuristikZentrum extends Lauf {
 
 		o.tue();
 
-		Lauf.outputErgebnis(o, GierigsucheHeuristikZentrum.class.getSimpleName(), zielfeld);
+		Lauf.outputErgebnis(o, GierigsucheHeuristikZentrum.class.getSimpleName());
 	}
 }

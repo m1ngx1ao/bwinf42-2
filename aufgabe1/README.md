@@ -19,6 +19,7 @@ Beispiele zu den Konzepten des Ansatzes sind [hier](examples.md).
 Um die Abbildung zu vereinfachen, ist im UML Klassendiagramm Folgendes weggelassen:
 * Hole-Methoden: durch die Attributauflistung nicht zwingend erforderlich
 * Override von Standard-Methoden (equals, hashCode, toString): im Modell standardmaessig durchgefuehrt aber von der Optimierung nicht benoetigt
+* Die Unterklassen von `Lauf` sind nur schematisch angedeutet durch `XYZ-Suche`. Die einzelnen Laeufe wie `Tiefensuche`, `Gierigsuche` und `Annealingsuche` verfahren nach demselben Schema wie `XYZ-Suche`.
 
 ``` mermaid
 classDiagram
@@ -27,12 +28,12 @@ classDiagram
 		-y : int
 	}
 	class Schulhof {
+		-felder : int[][]
 		-maxLaub : int
 		-maxFeldX : int
 		-maxFeldY : int
 		-breite : int
 		-hoehe : int
-		-zielfeld : Feld
 		-repraesentant : String
 		-berechneAttribute()
 		+Schulhof(breite : int, hoehe : int, zielfeld : Feld)
@@ -48,6 +49,7 @@ classDiagram
 		+tue(davor : Schulhof) Schulhof
 		+holeVeraenderndeOps(breite : int, hoehe : int) List~BlaseOp~$
 	}
+	Schulhof --> "0..1" Feld : Zielfeld
 	class Knoten {
 		-schritt : int
 		-prioritaet : int
@@ -79,7 +81,6 @@ classDiagram
 		<<Interface>>
 		+berechnePrioritaet(Knoten) int
 	}
-	Feld <.. Schulhof
 	Knoten o-- Schulhof
 	Knoten --> "0..1" BlaseOp : letzteOp
 	Knoten "0..1" <-- Knoten : vorgaenger
@@ -91,7 +92,7 @@ classDiagram
 	Optimierer o-- Strategie
 	class LaufClass["Lauf"] {
 		<<Abstract>>
-		#outputErgebnis(Optimierer, name : String, zielfeld : Feld)$
+		#outputErgebnis(Optimierer, name : String)$
 	}
 	class XyzSuche["XYZ-Suche"] {
 		+main(args : String[])$

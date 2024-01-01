@@ -6,7 +6,7 @@ import modell.Feld;
 import optimierung.*;
 
 public class Tiefensuche extends Lauf {
-	private static int BUDGET_SCHRITTTIEFE = 5;
+	private static int BUDGET_SCHRITTTIEFE = 2;
 
 	public static void main(String[] args) throws IOException {
 		Feld zielfeld = new Feld(2, 1);
@@ -21,6 +21,6 @@ public class Tiefensuche extends Lauf {
 
 		o.tue();
 
-		Lauf.outputErgebnis(o, Tiefensuche.class.getSimpleName() + "_" + BUDGET_SCHRITTTIEFE, zielfeld);
+		Lauf.outputErgebnis(o, Tiefensuche.class.getSimpleName() + "_" + BUDGET_SCHRITTTIEFE);
 	}
 }

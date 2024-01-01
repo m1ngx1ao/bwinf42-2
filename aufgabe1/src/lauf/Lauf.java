@@ -7,7 +7,8 @@ import modell.Feld;
 import optimierung.*;
 
 public abstract class Lauf {
-    protected static void outputErgebnis(Optimierer o, String name, Feld zielfeld) throws IOException {
+    protected static void outputErgebnis(Optimierer o, String name) throws IOException {
+		Feld zielfeld = o.holeBesterKnoten().holeSchulhof().holeZielfeld();
 		String zielfeldName = (zielfeld != null) ? (zielfeld.holeX() + "-" + zielfeld.holeY() + "/") : "beliebig";
         FileWriter fw = new FileWriter("aufgabe1/logs/" + zielfeldName + name + ".log");
 

@@ -31,6 +31,6 @@ public class AnnealingHeuristikZentrum extends Lauf {
 
 		o.tue();
 
-		Lauf.outputErgebnis(o, AnnealingHeuristikZentrum.class.getSimpleName(), zielfeld);
+		Lauf.outputErgebnis(o, AnnealingHeuristikZentrum.class.getSimpleName());
 	}
 }

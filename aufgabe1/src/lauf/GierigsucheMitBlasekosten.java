@@ -21,6 +21,6 @@ public class GierigsucheMitBlasekosten extends Lauf {
 
 		o.tue();
 
-		Lauf.outputErgebnis(o, GierigsucheMitBlasekosten.class.getSimpleName() + "_" + BLASEKOSTEN, zielfeld);
+		Lauf.outputErgebnis(o, GierigsucheMitBlasekosten.class.getSimpleName() + "_" + BLASEKOSTEN);
 	}
 }

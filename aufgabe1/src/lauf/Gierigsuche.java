@@ -19,6 +19,6 @@ public class Gierigsuche extends Lauf {
 
 		o.tue();
 
-		Lauf.outputErgebnis(o, Gierigsuche.class.getSimpleName(), zielfeld);
+		Lauf.outputErgebnis(o, Gierigsuche.class.getSimpleName());
 	}
 }

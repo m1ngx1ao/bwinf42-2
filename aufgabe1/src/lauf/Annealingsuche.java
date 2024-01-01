@@ -19,6 +19,6 @@ public class Annealingsuche extends Lauf {
 
 		o.tue();
 
-		Lauf.outputErgebnis(o, Annealingsuche.class.getSimpleName(), zielfeld);
+		Lauf.outputErgebnis(o, Annealingsuche.class.getSimpleName());
 	}
 }
