@@ -115,31 +115,7 @@ Fuer jede Fragestellung fassen zwei Tabellen die Ergebnisse zusammen:
 * Die jeweils *beste gefundene Zugreihenfolge* pro Optimierungsansatz und Priorisierungsstrategie. Die Tabelle ist aufsteigend geordnet nach dem besten erzielten Wert.
 * Die jeweiligen *Bestwerte* nach einer *Anzahl von Zuegen* pro Optimierungsansatz und Priorisierungsstrategie. Der Bestwert ergibt sich aus dem Laub auf dem Zielfeld wenn vorgegeben oder ansonsten einem beliebigen Innenhof-Feld. Bricht die beste Blasereihenfolge wegen dieser Restriktion der Zahl der simulierten Blase-Operationen schon vor der gegebenen Anzahl der Zuege ab, so ist das mit `---` gekennzeichnet.
 
-## Vorgegebenes Zielfeld (2, 1)
-
-| Lauf/Strategie | Bester Schulhof: Laub auf Innenfeldern | Bester Schulhof: Zahl der benoetigten Blase-Operationen | Einzigartige gesehene Schulhoefe |
-| --- | ---: | ---: | ---: |
-| Tiefensuche_4 | 400 | 4 | ??? |
-| GierigsucheMitBlasekosten_80 | ??? | ??? | ??? |
-| GierigsucheMitBlasekosten_40 | ??? | ??? | ??? |
-| GierigsucheMitBlasekosten_20 | ??? | ??? | ??? |
-| GierigsucheMitBlasekosten_10 | ??? | ??? | ??? |
-| Annealingsuche | ??? | ??? | ??? |
-| Gierigsuche | ??? | ??? | ??? |
-| GierigsucheHeuristikZentrum | ??? | ??? | ??? |
-
-| Lauf/Strategie | 4 | 9 | 13 | 21 | 51 | 703 | 1307 |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Tiefensuche_4 | 400 | --- | --- | --- | --- | --- | --- |
-| GierigsucheMitBlasekosten_80 | ??? | ??? | --- | --- | --- | --- | --- |
-| GierigsucheMitBlasekosten_40 | ??? | ??? | ??? | --- | --- | --- | --- |
-| GierigsucheMitBlasekosten_20 | ??? | ??? | ??? | ??? | --- | --- | --- |
-| GierigsucheMitBlasekosten_10 | ??? | ??? | ??? | ??? | ??? | --- | --- |
-| Annealingsuche | ??? | ??? | ??? | ??? | ??? | ??? | --- |
-| Gierigsuche | ??? | ??? | ??? | ??? | ??? | ??? | --- |
-| GierigsucheHeuristikZentrum | ??? | ??? | ??? | ??? | ??? | ??? | ??? |
-
-## Beliebiges Zielfeld
+## Ohne Zielfeld
 
 | Lauf/Strategie | Bester Schulhof: Laub auf Innenfeldern | Bester Schulhof: Zahl der benoetigten Blase-Operationen | Einzigartige gesehene Schulhoefe |
 | --- | ---: | ---: | ---: |
@@ -152,7 +128,7 @@ Fuer jede Fragestellung fassen zwei Tabellen die Ergebnisse zusammen:
 | Gierigsuche | 1.395 | 703 | 92.734 |
 | GierigsucheHeuristikZentrum | 1.954 | 1.307 | 205.300 |
 
-| Lauf/Strategie | 4 | 9 | 13 | 21 | 51 | 703 | 1307 |
+| Lauf/Strategie | 4 | 9 | 13 | 21 | 51 | 703 | 1.307 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | Tiefensuche_4 | 400 | --- | --- | --- | --- | --- | --- |
 | GierigsucheMitBlasekosten_80 | 365 | 696 | --- | --- | --- | --- | --- |
@@ -163,9 +139,35 @@ Fuer jede Fragestellung fassen zwei Tabellen die Ergebnisse zusammen:
 | Gierigsuche | 261 | 360 | 412 | 427 | 505 | 1.395 | --- |
 | GierigsucheHeuristikZentrum | 395 | 481 | 555 | 689 | 851 | 1.771 | 1.954 |
 
+## Mit vorgegebenem Zielfeld
+
+Das Zielfeld ist den Laeufen auf `(2,1)` gesetzt.
+
+| Lauf/Strategie | Bester Schulhof: Laub auf Innenfeldern | Bester Schulhof: Zahl der benoetigten Blase-Operationen | Einzigartige gesehene Schulhoefe |
+| --- | ---: | ---: | ---: |
+| Tiefensuche_4 | 389 | 4 | 1.132.722 |
+| GierigsucheMitBlasekosten_80 | 569 | 8 | 336.123 |
+| GierigsucheMitBlasekosten_40 | 698 | 14 | 273.589 |
+| GierigsucheMitBlasekosten_20 | 679 | 22 | 310.427 |
+| GierigsucheMitBlasekosten_10 | 947 | 49 | 262.043 |
+| GierigsucheHeuristikZentrum | 1.419 | 374 | 252.368 |
+| Gierigsuche | 1.488 | 1.105 | 151.480 |
+| Annealingsuche | 1.492 | 1.066 | 158.201 |
+
+| Lauf/Strategie | 4 | 8 | 14 | 22 | 49 | 374 | 1.066 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Tiefensuche_4 | 389 | --- | --- | --- | --- | --- | --- |
+| GierigsucheMitBlasekosten_80 | 320 | 569 | --- | --- | --- | --- | --- |
+| GierigsucheMitBlasekosten_40 | 381 | 510 | 698 | --- | --- | --- | --- |
+| GierigsucheMitBlasekosten_20 | 324 | 412 | 565 | 679 | --- | --- | --- |
+| GierigsucheMitBlasekosten_10 | 324 | 394 | 527 | 623 | 947 | --- | --- |
+| GierigsucheHeuristikZentrum | 324 | 385 | 501 | 592 | 794 | 1.419 | --- |
+| Annealingsuche | 324 | 394 | 463 | 487 | 544 | 1.027 | 1.492 |
+| Gierigsuche | 324 | 394 | 463 | 487 | 544 | 1.027 | 1.488 |
+
 # Interpretation
 
-TBD
+## Ohne Zielfeld
 
 Die **Tiefensuche** mit limitierter Tiefe liefert die Basis, was das beste Ergebnis nach einer gewissen (kleinen) Anzahl von Schritte ueberhaupt moeglich ist. Da dabei viele unvorteilhafte Knoten weiter verfolgt werden, fuehrt zu hoher Laufzeit bei schlechtem Ergebnis.
 
@@ -176,3 +178,10 @@ Die **Gierigsuche mit Blasekosten** beruecksichtigt die Zahl der benoetigten Bla
 Die **Gierigsuche mit Zentrum-Heuristik** geht in eine ganz andere Richtung. In die Prioritaet der gierigen Abarbeitungsreihenfolge geht hier nicht nur der Wert des maximalen Laubs ein. Dazu kommt noch die Summe des Laubes auf allen Innenhoffelder. Diese *Heuristik* basiert auf der Annahme, dass das Laub der Innenhoffelder relativ einfach noch auf das Maximalfeld geblasen werden kann. Das Laub auf ihnen ist also zum guten Teil ein Indikator fuer zukuenftige Erfolge. Das herausragende Ergebnis (ein zur Gierigsuche ueber 50% gesteigerte Zielwert) bestaetigt diese Annahme. Ausserdem ist interessant, dass hier die verfolgten Ketten noch tiefer sind. Durch die staendige Steigerung des Zielwertes kommen Alternativen fuer fruehere Knoten nicht zur Beruecksichtigung.
 
 Als Alternative ist auch die **Annealingsuche** umgesetzt, die das *simulated annealing* implementiert. Mit einer exponentiell fallenden Wahrscheinlichkeit wird zufaellig ein Knoten unabhaengig von seiner Prioritaet auf moegliche Nachfolger untersucht. Diese Wahrscheinlichkeit und ihr Verfall sind so eingestellt, dass im gesamten Lauf ca. 25% die Untersuchungen auf diesem Zufallsprinzip beruhen. Das Ergebnis laesst den Schluss zu, dass diese Randomisierung hier keinen Vorteil bringt. Das laesst sich so interpretieren, dass durch lokale Maxima durch die iterativen Blase-Operationen wenig oder kaum ausgepraegt sind. Durch die Verfolgung zufaelliger Knoten ist das Ergebnis ein bisschen schlechter als beim *gierigen Ansatz*.
+
+## Mit vorgegebenem Zielfeld
+
+Abweichend von obiger Budgetierung auf ca. 500.000 Blase-Operationen benoetigt hier die Tiefensuche *viermal mehr* Blaseoperationen, um exhaustiv bis Schritttiefe 4 zu durchsuchen. Dies liegt daran, dass das Zielfeld die vertikale und diagonale Spiegelachse ausser Kraft setzt und Aequivalenzklassen nur noch aus $2$ statt bestehen statt der $8$ fuer dann, wenn kein Zielfeld vorgegeben ist.
+
+In den Ergebnissen zeigen sich keine grossen Unterschiede bezueglich des jeweils erreichten Bestwerts. Das Vorabfestlegen des Zielfelds bringt also diesbezueglich keine Nachteile. Die einzige Ausnahme ist die **Gierigsuche mit Zentrum-Heuristik**, die deutlich schlechter abschneidet als ohne Zielfeld und sogar noch ein wenig schlechter als die *Gierigsuche* ist. Das liegt zum Einen daran, dass das Zielfeld am Rand des Innenhofes liegt und manche angrenzende Felder bei der Heuristik nicht beruecksichtigt werden. Zum Anderen profitiert diese Heuristik ohne vorgegebenem Zielfeld sehr stark davon, dass alle Innenhoffelder Maximalfelder werden koennen. Dies entspricht genau der Beruecksichtigung aller Innenhoffelder durch die Heuristik. Ihr volles Potential kann die Heuristik also nur ohne vorgegebenes Zielfeld entfalten.
+
