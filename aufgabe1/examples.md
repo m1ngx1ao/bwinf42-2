@@ -1,8 +1,8 @@
-# Aequivalenz & Representanten
+# Aequivalenz & Repräsentanten
 
 ## Quadratisch ohne Zielfeld
 
-Die folgenden Schulhoefe sind aequivalent, da sie sich aus eine Sequenz von Spiegelungen ergeben. Ihr Repraesentant ist der String `9,2,7,1,4,6,5,3,8@3,3`, der sich aus dem Maximum des lexikografischen Vergleichs ergibt. Andere Vergleiche (Minimum, Einzelfeldvergleich in `int`) waeren auch moeglich. Entscheidend ist lediglich, dass diese Berechnung immer auf dieselben Art und Weise erfolgt und fuer alle aequivalenten Schulhoefe zum selben Ergebnis kommt.
+Die folgenden Schulhoefe sind aequivalent, da sie sich aus einer Sequenz von Spiegelungen ergeben. Ihr Repraesentant ist der String `9,2,7,1,4,6,5,3,8@3,3`, der sich aus dem Maximum des lexikografischen Vergleichs ergibt. Andere Vergleiche (Minimum, Einzelfeldvergleich in `int`) waeren auch moeglich. Entscheidend ist lediglich, dass diese Berechnung immer auf dieselben Art und Weise erfolgt und fuer alle aequivalenten Schulhoefe zum selben Ergebnis kommt.
 
 Schulhof, aus dem sich der Repraesentant ergibt:
 ```
@@ -160,9 +160,9 @@ Wenn ein Zielfeld fest vorgegeben ist, darf es sich durch die Spiegelungen nicht
 
 ## Vervollstaendigung der Aufgabenstellung
 
-Mehrere Randfaelle sind in der Aufgabenstellungen nicht abgedeckt. Dieser Abschnitt zeigt ihre Definition. Dabei wird davon ausgegangen, dass
+Mehrere Randfaelle sind in der Aufgabenstellung nicht abgedeckt. Dieser Abschnitt zeigt ihre Definition. Dabei wird davon ausgegangen, dass
 * der Schulhof in alle Richtungen umzaeunt ist,
-* kein Rueckstoss aus dem Blasen gegen den Zaun entsteht.
+* kein Rueckstoß aus dem Blasen gegen den Zaun entsteht.
 
 Beim Blasen entlang des Rands gibt es am Zaun keinen Seitenverlust:
 ```
@@ -191,7 +191,7 @@ Das Blasen ein Feld vor dem Zaun hat keine Wirkung:
 -----------------             -----------------
 ```
 
-Ebensowenig das Blasen direkt vor dem Zaun:
+Ebenso wenig das Blasen direkt vor dem Zaun:
 ```
 -----------------             -----------------
 |  0| 40| 50| 60|             |  0| 40| 50| 60|
@@ -200,7 +200,7 @@ Ebensowenig das Blasen direkt vor dem Zaun:
 -----------------             -----------------
 ```
 
-## Potentiell veraendernde Blaseoperationen
+## Potenziell veraendernde Blase-Operationen
 
 Fuer einen $5*5$ Schulhof sind alle $60$ Blaseoperationen gezeigt, die das Potential haben, die Laubsitutation auf dem Schulhof zu veraendern. Es wird nur von Potential gesprochen, da eine tatsaechliche Veraenderung natuerlich von der Laubsituation abhaengig ist (liegt zum Beispiel ueberhaupt kein Laub, wird keine Operation zu einer Veraenderung fuehren).
 

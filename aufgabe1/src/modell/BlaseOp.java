@@ -122,7 +122,7 @@ public class BlaseOp {
 	 * Eine Blase-Operation ist nur dann potentiell veraendernd, wenn sie
 	 * die Chance hat die Laubverteilung zu veraendern.
 	 * 
-	 * Dafuer ist notwendig, dass die Base-Operation bei der initialen
+	 * Dafuer ist notwendig, dass die Blase-Operation bei der initialen
 	 * Verteilung eine Veraenderung hervorruft. Daher wird die Liste
 	 * anhand mehrerer Op-Simulationen erstellt.
 	 */
