@@ -119,7 +119,7 @@ public class BlaseOp {
 	}
 
 	/**
-	 * Eine Blase-Operation ist nur dann potentiell veraendernd, wenn sie
+	 * Eine Blase-Operation ist nur dann potenziell veraendernd, wenn sie
 	 * die Chance hat die Laubverteilung zu veraendern.
 	 * 
 	 * Dafuer ist notwendig, dass die Blase-Operation bei der initialen
