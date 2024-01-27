@@ -7,10 +7,10 @@ import modell.Feld;
 import optimierung.*;
 
 public abstract class Lauf {
-    protected static void outputErgebnis(Optimierer o, String name) throws IOException {
+	protected static void outputErgebnis(Optimierer o, String name) throws IOException {
 		Feld zielfeld = o.holeBesterKnoten().holeSchulhof().holeZielfeld();
 		String zielfeldName = (zielfeld != null) ? (zielfeld.holeX() + "-" + zielfeld.holeY() + "/") : "beliebig";
-        FileWriter fw = new FileWriter("aufgabe1/logs/" + zielfeldName + name + ".log");
+		FileWriter fw = new FileWriter("aufgabe1/logs/" + zielfeldName + name + ".log");
 
 		fw.write("Optimierungsdauer: " + String.format("%.3f", o.holeOptimierungsdauer()) + " secs");
 		fw.write("\nGesehene einzigartige Schulhoefe: " + o.holeZahlEinzigartigerSchulhoefe());
@@ -23,7 +23,7 @@ public abstract class Lauf {
 		}
 		fw.write("\n\n" + "=".repeat(50) + "\n\n");
 
-        Knoten bester = o.holeBesterKnoten();
+		Knoten bester = o.holeBesterKnoten();
 		fw.write("Bester Schulhof");
 		fw.write("\n  Maximal-Laub: " + bester.holeSchulhof().holeMaxLaub());
 		fw.write("\n  Schritte: " + bester.holeSchritt());
@@ -31,5 +31,5 @@ public abstract class Lauf {
 
 		fw.flush();
 		fw.close();
-    }
+	}
 }

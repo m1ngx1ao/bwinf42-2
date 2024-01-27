@@ -69,7 +69,7 @@ public class Knoten implements Comparable<Knoten>{
 	 * der Bearbeitung zurueck und nicht den aufsteigende Prioritaeten.
 	 */
 	@Override
-    public int compareTo(Knoten other) {
+	public int compareTo(Knoten other) {
 		return other.holePrioritaet() - this.holePrioritaet();
-    }
+	}
 }

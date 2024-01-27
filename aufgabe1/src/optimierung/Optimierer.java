@@ -68,13 +68,13 @@ public abstract class Optimierer {
 		return zahlBlaseOps;
 	}
 
-    public int holeMaxSchritttiefe() {
-        return maxSchritttiefe;
-    }
+	public int holeMaxSchritttiefe() {
+		return maxSchritttiefe;
+	}
 
-    public void setzeBudgetSchritttiefe(int tiefe) {
+	public void setzeBudgetSchritttiefe(int tiefe) {
 		this.budgetSchritttiefe = tiefe;
-    }
+	}
 
 	public void setzeBudgetBlaseOp(int blaseop) {
 		this.budgetBlaseOp = blaseop;

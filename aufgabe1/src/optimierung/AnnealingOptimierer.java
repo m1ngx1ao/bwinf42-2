@@ -46,9 +46,9 @@ public class AnnealingOptimierer extends Optimierer {
 		return zahlBearbeitungZufall;
 	}
 
-    public int holeBearbeitungenPrio() {
-        return zahlBearbeitungPrio;
-    }
+	public int holeBearbeitungenPrio() {
+		return zahlBearbeitungPrio;
+	}
 
 	public void tue() {
 		zahlBlaseOps = 0;
