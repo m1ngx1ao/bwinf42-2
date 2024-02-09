@@ -6,3 +6,6 @@ class Beobachter(ABC):
 	@abstractmethod
 	def melde(self, b: Besiedlungsplan):
 		...
+	@abstractmethod
+	def finalisiere(self):
+		...

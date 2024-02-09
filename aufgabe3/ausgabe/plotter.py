@@ -1,11 +1,11 @@
 import tkinter as tk
 #from PIL import Image
 
-from modell import Besiedlungsplan, TOrt
+from modell import Besiedlungsplan, TPunkt
 from .beobachter import Beobachter
 
 class Trafo:
-	def __init__(self, orte: frozenset[TOrt],
+	def __init__(self, orte: frozenset[TPunkt],
 			rand: float, breite: float, hoehe: float):
 		xs, ys = zip(*orte)
 		self.min_x, self.max_x = min(xs), max(xs)
@@ -23,9 +23,9 @@ class Plotter(Beobachter):
 	HOEHE = 500
 	RAND = 7
 	ORTSCHAFT_RADIUS = 3
-	ORTSCHAFT_FARBE = '#66F'
-	#ORTSCHAFT_FARBE_GUELTIG = '#6F6'
-	#ORTSCHAFT_FARBE_UNGUELTIG = '#F33'
+	ORTSCHAFT_FARBE_GUELTIG = '#6F6'
+	ORTSCHAFT_FARBE_ZUNAHE_MIT_SCHUTZ = '#66F'
+	ORTSCHAFT_FARBE_ZUNAHE_OHNE_SCHUTZ = '#F33'
 	ZENTRUM_RADIUS = 3
 	ZENTRUM_FARBE = 'black'
 
@@ -46,21 +46,24 @@ class Plotter(Beobachter):
 		damit es sich besser anschauen laesst.
 		Der Punkt (0,0) befindet sich oben links.
 		"""
+		self.__canvas.delete('all')
 		trafo = Trafo(
-			b.hole_ortschaften() | b.hole_zentren(),
+			b.hole_orte() | b.hole_zentren(),
 			Plotter.RAND, Plotter.BREITE, Plotter.HOEHE
 		)
-		self.__male_zentren(trafo, b.hole_zentren(), b.param.schutz_zentrum_bis)
-		self.__male_ortschaften(trafo, b.hole_ortschaften())
+		self.__male_zentren(trafo, b)
+		self.__male_orte(trafo, b)
 		self.__fenster.update()
+
+	def finalisiere(self):
 		self.__fenster.mainloop()
 
-	def __male_zentren(self, trafo: Trafo, zentren: frozenset[TOrt], schutz_bis: float):
-		for x, y in zentren:
+	def __male_zentren(self, trafo: Trafo, b: Besiedlungsplan):
+		for x, y in b.hole_zentren():
 			trafo_x = trafo.x(x)
 			trafo_y = trafo.y(y)
-			trafo_radius_x = trafo.zoom_x * schutz_bis
-			trafo_radius_y = trafo.zoom_y * schutz_bis
+			trafo_radius_x = trafo.zoom_x * b.param.schutz_zentrum_bis
+			trafo_radius_y = trafo.zoom_y * b.param.schutz_zentrum_bis
 			self.__canvas.create_oval(
 				trafo_x - trafo_radius_x,
 				trafo_y - trafo_radius_y,
@@ -76,8 +79,16 @@ class Plotter(Beobachter):
 				fill=Plotter.ZENTRUM_FARBE
 			)
 
-	def __male_ortschaften(self, trafo: Trafo, ortschaften: frozenset[TOrt]):
-		for x, y in ortschaften:
+	def __male_orte(self, trafo: Trafo, b: Besiedlungsplan):
+		for o in b.hole_orte():
+			if o in b.hole_zunahe_orte():
+				if o in b.hole_geschuetzte_orte():
+					farbe = Plotter.ORTSCHAFT_FARBE_ZUNAHE_MIT_SCHUTZ
+				else:
+					farbe = Plotter.ORTSCHAFT_FARBE_ZUNAHE_OHNE_SCHUTZ
+			else:
+				farbe = Plotter.ORTSCHAFT_FARBE_GUELTIG
+			x, y = o
 			trafo_x = trafo.x(x)
 			trafo_y = trafo.y(y)
 			self.__canvas.create_oval(
@@ -85,5 +96,5 @@ class Plotter(Beobachter):
 				trafo_y - Plotter.ORTSCHAFT_RADIUS,
 				trafo_x + Plotter.ORTSCHAFT_RADIUS,
 				trafo_y + Plotter.ORTSCHAFT_RADIUS,
-				fill=Plotter.ORTSCHAFT_FARBE
+				fill=farbe
 			)
