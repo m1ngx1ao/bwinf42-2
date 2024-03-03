@@ -1,7 +1,7 @@
 import random
 
 from modell import Besiedlungsplan, TPunkt
-from ausgabe import Beobachter
+from beobachter import Beobachter
 
 class GierigOptimierer:
 	MAX_RANDOM_BEWEGUNG = 5

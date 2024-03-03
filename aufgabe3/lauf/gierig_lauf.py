@@ -1,6 +1,6 @@
 from modell import Besiedlungsplan
 from modell import Parameter
-from ausgabe import Plotter, Waiter
+from beobachter import Plotter, Logger, Stats
 from optimierung import GierigOptimierer
 
 class GierigLauf:
@@ -28,4 +28,9 @@ class GierigLauf:
 			{(200, 100)},
 			Parameter()
 		)
-		GierigOptimierer(b, [Plotter(), Waiter(.3)], 10).tue()
+		lauf_name = __class__.__name__
+		GierigOptimierer(b, [
+			Logger(lauf_name),
+			Stats(lauf_name),
+			Plotter(lauf_name)
+		], 10).tue()

@@ -1,5 +1,6 @@
 import tkinter as tk
-#from PIL import Image
+import os
+from PIL import Image
 
 from modell import Besiedlungsplan, TPunkt
 from .beobachter import Beobachter
@@ -29,10 +30,12 @@ class Plotter(Beobachter):
 	ZENTRUM_RADIUS = 3
 	ZENTRUM_FARBE = 'black'
 
-	def __init__(self):
+	def __init__(self, lauf_name):
 		self.__fenster = tk.Tk()
+		self.__pfad_name = super()._vorbereite_output_folder(lauf_name, 'karten')
 		breite = Plotter.BREITE + Plotter.RAND * 2
 		hoehe = Plotter.HOEHE + Plotter.RAND * 2
+		self.__iter_num = 0
 		self.__fenster.geometry(f'{ breite }x{ hoehe }')
 		self.__canvas = tk.Canvas(self.__fenster, width=breite, height=hoehe)
 		self.__canvas.pack()
@@ -46,6 +49,7 @@ class Plotter(Beobachter):
 		damit es sich besser anschauen laesst.
 		Der Punkt (0,0) befindet sich oben links.
 		"""
+		self.__iter_num += 1
 		self.__canvas.delete('all')
 		trafo = Trafo(
 			b.hole_orte() | b.hole_zentren(),
@@ -54,9 +58,11 @@ class Plotter(Beobachter):
 		self.__male_zentren(trafo, b)
 		self.__male_orte(trafo, b)
 		self.__fenster.update()
+		self.__speichere_canvas_to_file(self.__pfad_name, self.__iter_num)
 
 	def finalisiere(self):
-		self.__fenster.mainloop()
+		#self.__fenster.mainloop()
+		...
 
 	def __male_zentren(self, trafo: Trafo, b: Besiedlungsplan):
 		for x, y in b.hole_zentren():
@@ -98,3 +104,10 @@ class Plotter(Beobachter):
 				trafo_y + Plotter.ORTSCHAFT_RADIUS,
 				fill=farbe
 			)
+
+	def __speichere_canvas_to_file(self, pfad_name: str, iter_num: int):
+		eps_name = f'{ pfad_name }.eps'
+		self.__canvas.postscript(file = eps_name)
+		png_name = ('0000' + str(iter_num))[-5:]
+		Image.open(eps_name).save(f'{pfad_name}/{png_name}.png', 'png')
+		os.remove(eps_name)
