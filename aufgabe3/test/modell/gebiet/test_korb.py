@@ -1,4 +1,4 @@
-from modell import Polygon, TPunkt
+from modell import Gebiet
 
 #   01234567
 #  
@@ -10,7 +10,7 @@ from modell import Polygon, TPunkt
 # 5
 
 def hole_cut():
-	return Polygon([
+	return Gebiet([
 		(40, 30),
 		(40, 0),
 		(10, 0),
@@ -38,18 +38,18 @@ def hole_cut():
 
 def test_y_20_wie_durchgangspunkte_links():
 	cut = hole_cut()
-	assert cut.enthaelt((5, 20))
-	assert not cut.enthaelt((15, 20))
-	assert cut.enthaelt((35, 20))
+	assert cut.ist_drin((5, 20))
+	assert not cut.ist_drin((15, 20))
+	assert cut.ist_drin((35, 20))
 
 def test_y_30_wie_sattelpunkt_rechts():
 	cut = hole_cut()
-	assert not cut.enthaelt((15, 30))
-	assert not cut.enthaelt((45, 30))
-	assert cut.enthaelt((65, 30))
+	assert not cut.ist_drin((15, 30))
+	assert not cut.ist_drin((45, 30))
+	assert cut.ist_drin((65, 30))
 
 def test_y_40_wie_horizontaler_rand_unten():
 	cut = hole_cut()
-	assert cut.enthaelt((15, 40))
-	assert cut.enthaelt((55, 40))
-	assert not cut.enthaelt((75, 40))
+	assert cut.ist_drin((15, 40))
+	assert cut.ist_drin((55, 40))
+	assert not cut.ist_drin((75, 40))
