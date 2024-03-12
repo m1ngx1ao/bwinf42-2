@@ -1,11 +1,11 @@
-from modell import Besiedlungsplan
-from modell import Parameter
+from modell import Besiedlungsplan, Gebiet, Parameter
 from beobachter import Plotter, Logger, Stats
 from optimierung import GierigOptimierer
 
 class GierigLauf:
 	def tue(self):
 		b = Besiedlungsplan(
+			Gebiet.von_datei('input/siedler1.txt'),
 			{
 				(0, 0),
 				(0, 1),

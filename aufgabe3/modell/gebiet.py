@@ -1,10 +1,27 @@
+from __future__ import annotations
+
 import itertools as it
-from .besiedlungsplan import TPunkt
+
+from .types import TPunkt
 
 class Gebiet:
 	def __init__(self, linienzug: list[TPunkt]):
 		assert linienzug[0] == linienzug[-1]
 		self.__linienzug = linienzug
+		self.__eckpunkte = frozenset(self.__linienzug)
+
+	@staticmethod
+	def von_datei(datei_name: str) -> Gebiet:
+		with open(datei_name, 'r') as f:
+			input_str = f.read()
+			f.close()
+		ecken = input_str.split('\n')[1:]
+		# Linienzug der Datei nie abgeschlossen -> korrigieren
+		ecken.append(ecken[0])
+		return Gebiet([
+			TPunkt([float(e) for e in ecke.split(' ')])
+			for ecke in ecken
+		])
 
 	def ist_drin(self, p: TPunkt):
 		"""
@@ -37,3 +54,14 @@ class Gebiet:
 				if sx < px:
 					anzahl_schnittpunkte += 1
 		return anzahl_schnittpunkte % 2 == 1
+
+	# GETTER
+
+	def hole_linienzug(self) -> list[TPunkt]:
+		"""
+		Gibt Kopie zurueck, damit von aussen nicht aenderbar ist
+		"""
+		return self.__linienzug.copy()
+
+	def hole_eckpunkte(self) -> frozenset[TPunkt]:
+		return self.__eckpunkte

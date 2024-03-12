@@ -17,7 +17,8 @@ class Logger(Beobachter):
 		self.__ausgabe(f'Iteration {self.__iter_num}:')
 		self.__ausgabe(f'# Gesundheitszentren: {len(b.hole_zentren())}')
 		self.__ausgabe(f'# Ortschaften: {len(b.hole_orte())}')
-		self.__ausgabe(f'# zunahen Ortschaften: {len(b.hole_zunahe_orte())}')
+		self.__ausgabe(f'# zu nahe Ortschaften: {len(b.hole_zunahe_orte())}')
+		self.__ausgabe(f'# Ortschaften ausserhalb Gebiet: {len(b.hole_ausserhalb_gebiet_orte())}')
 		self.__ausgabe(f'Loss: {b.hole_loss()}')
 		self.__ausgabe('')
 		

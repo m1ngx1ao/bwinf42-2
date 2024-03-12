@@ -34,7 +34,7 @@ class GierigOptimierer:
 			self.__bestimme_punkt(z)
 			for z in plan.hole_zentren()
 		}
-		return Besiedlungsplan(orte, zentren, plan.param)
+		return Besiedlungsplan(plan.hole_gebiet(), orte, zentren, plan.param)
 	
 	def __bestimme_punkt(self, p: TPunkt) -> TPunkt:
 		x, y = p

@@ -1,4 +1,4 @@
-from .besiedlungsplan import TPunkt
 from .besiedlungsplan import Besiedlungsplan
-from .parameter import Parameter
 from .gebiet import Gebiet
+from .parameter import Parameter
+from .types import TPunkt

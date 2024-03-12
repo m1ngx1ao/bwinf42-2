@@ -23,10 +23,13 @@ class Plotter(Beobachter):
 	BREITE = 500
 	HOEHE = 500
 	RAND = 7
+	GEBIET_FARBE = '#CCC'
 	ORTSCHAFT_RADIUS = 3
 	ORTSCHAFT_FARBE_GUELTIG = '#6F6'
 	ORTSCHAFT_FARBE_ZUNAHE_MIT_SCHUTZ = '#66F'
-	ORTSCHAFT_FARBE_ZUNAHE_OHNE_SCHUTZ = '#F33'
+	ORTSCHAFT_FARBE_ZUNAHE_OHNE_SCHUTZ = '#F3F'
+	ORTSCHAFT_RAND_AUSSERHALB_GEBIET = '#F00'
+	ORTSCHAFT_RAND_IM_GEBIET = '#000'
 	ZENTRUM_RADIUS = 3
 	ZENTRUM_FARBE = 'black'
 
@@ -52,9 +55,10 @@ class Plotter(Beobachter):
 		self.__iter_num += 1
 		self.__canvas.delete('all')
 		trafo = Trafo(
-			b.hole_orte() | b.hole_zentren(),
+			b.hole_gebiet().hole_eckpunkte() | b.hole_orte() | b.hole_zentren(),
 			Plotter.RAND, Plotter.BREITE, Plotter.HOEHE
 		)
+		self.__male_gebiet(trafo, b)
 		self.__male_zentren(trafo, b)
 		self.__male_orte(trafo, b)
 		self.__fenster.update()
@@ -63,6 +67,13 @@ class Plotter(Beobachter):
 	def finalisiere(self):
 		#self.__fenster.mainloop()
 		...
+
+	def __male_gebiet(self, trafo: Trafo, b: Besiedlungsplan):
+		xy_paare = []
+		for x, y in b.hole_gebiet().hole_linienzug():
+			xy_paare.append(trafo.x(x))
+			xy_paare.append(trafo.y(y))
+		self.__canvas.create_polygon(*xy_paare, fill=Plotter.GEBIET_FARBE)
 
 	def __male_zentren(self, trafo: Trafo, b: Besiedlungsplan):
 		for x, y in b.hole_zentren():
@@ -74,8 +85,7 @@ class Plotter(Beobachter):
 				trafo_x - trafo_radius_x,
 				trafo_y - trafo_radius_y,
 				trafo_x + trafo_radius_x,
-				trafo_y + trafo_radius_y,
-				fill='cyan'
+				trafo_y + trafo_radius_y
 			)
 			self.__canvas.create_rectangle(
 				trafo_x - Plotter.ZENTRUM_RADIUS,
@@ -89,11 +99,15 @@ class Plotter(Beobachter):
 		for o in b.hole_orte():
 			if o in b.hole_zunahe_orte():
 				if o in b.hole_geschuetzte_orte():
-					farbe = Plotter.ORTSCHAFT_FARBE_ZUNAHE_MIT_SCHUTZ
+					innen = Plotter.ORTSCHAFT_FARBE_ZUNAHE_MIT_SCHUTZ
 				else:
-					farbe = Plotter.ORTSCHAFT_FARBE_ZUNAHE_OHNE_SCHUTZ
+					innen = Plotter.ORTSCHAFT_FARBE_ZUNAHE_OHNE_SCHUTZ
 			else:
-				farbe = Plotter.ORTSCHAFT_FARBE_GUELTIG
+				innen = Plotter.ORTSCHAFT_FARBE_GUELTIG
+			if o in b.hole_ausserhalb_gebiet_orte():
+				rand = Plotter.ORTSCHAFT_RAND_AUSSERHALB_GEBIET
+			else:
+				rand = Plotter.ORTSCHAFT_RAND_IM_GEBIET
 			x, y = o
 			trafo_x = trafo.x(x)
 			trafo_y = trafo.y(y)
@@ -102,7 +116,8 @@ class Plotter(Beobachter):
 				trafo_y - Plotter.ORTSCHAFT_RADIUS,
 				trafo_x + Plotter.ORTSCHAFT_RADIUS,
 				trafo_y + Plotter.ORTSCHAFT_RADIUS,
-				fill=farbe
+				fill=innen,
+				outline=rand
 			)
 
 	def __speichere_canvas_to_file(self, pfad_name: str, iter_num: int):

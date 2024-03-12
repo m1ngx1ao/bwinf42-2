@@ -3,9 +3,9 @@ import math
 import itertools as it
 import functools as ft
 
+from .gebiet import Gebiet
 from .parameter import Parameter
-
-TPunkt = tuple[float, float]
+from .types import TPunkt
 
 @ft.total_ordering
 class Besiedlungsplan:
@@ -13,13 +13,25 @@ class Besiedlungsplan:
 	Plaene sind vergleichbar anhand ihres Losses
 	"""
 
-	def __init__(self, orte: set[TPunkt],
+	LOSS_AUSSERHALB_GEBIET = 50
+
+	def __init__(self, gebiet: Gebiet, orte: set[TPunkt],
 			zentren: set[TPunkt], param: Parameter):
 		self.param = param
+		self.__gebiet = gebiet
 		self.__orte = frozenset(orte)
 		self.__zentren = frozenset(zentren)
 		self.__geschuetzte_orte = frozenset(self.__berechne_geschuetzte_orte(zentren, orte))
+		self.__ausserhalb_gebiet_orte = frozenset(self.__berechne_ausserhalb_gebiet_orte(orte))
+		self.__loss = 0
 		self.__auswerte_ort_abstand()
+		self.__auswerte_gebiet()
+
+	def __berechne_ausserhalb_gebiet_orte(self, orte: set[TPunkt]) -> set[TPunkt]:
+		return {
+			o for o in orte
+			if not self.__gebiet.ist_drin(o)
+		}
 
 	def __berechne_geschuetzte_orte(self, zentren: set[TPunkt], orte: set[TPunkt]) -> set[TPunkt]:
 		return {
@@ -32,17 +44,18 @@ class Besiedlungsplan:
 
 	def __auswerte_ort_abstand(self):
 		zunahe_orte = set()
-		loss = 0
 		for o1, o2 in list(it.combinations(self.__orte, 2)):
 			erlaubter_abstand = self.param.min_abstand \
 				if {o1, o2} & self.__geschuetzte_orte \
 				else self.param.sicher_abstand_ab
 			abstand = self.__berechne_abstand(o1, o2)
 			if erlaubter_abstand > abstand:
-				loss += erlaubter_abstand - abstand
+				self.__loss += erlaubter_abstand - abstand
 				zunahe_orte.update([o1, o2])
 		self.__zunahe_orte = frozenset(zunahe_orte)
-		self.__loss = loss
+
+	def __auswerte_gebiet(self):
+		self.__loss += len(self.__ausserhalb_gebiet_orte) * Besiedlungsplan.LOSS_AUSSERHALB_GEBIET
 
 	def __berechne_abstand(self, a: TPunkt, b: TPunkt) -> float:
 		ax, ay = a
@@ -59,6 +72,9 @@ class Besiedlungsplan:
 	def hole_loss(self) -> float:
 		return self.__loss
 
+	def hole_gebiet(self) -> Gebiet:
+		return self.__gebiet
+
 	def hole_orte(self) -> frozenset[TPunkt]:
 		return self.__orte
 
@@ -70,3 +86,6 @@ class Besiedlungsplan:
 
 	def hole_zunahe_orte(self) -> frozenset[TPunkt]:
 		return self.__zunahe_orte
+
+	def hole_ausserhalb_gebiet_orte(self) -> frozenset[TPunkt]:
+		return self.__ausserhalb_gebiet_orte
