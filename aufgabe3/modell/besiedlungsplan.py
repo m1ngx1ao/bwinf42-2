@@ -16,16 +16,23 @@ class Besiedlungsplan:
 	LOSS_AUSSERHALB_GEBIET = 50
 
 	def __init__(self, gebiet: Gebiet, orte: set[TPunkt],
-			zentren: set[TPunkt], param: Parameter):
+			zentren: set[TPunkt] | frozenset[TPunkt], param: Parameter, alles_im_gebiet: bool = False):
+		"""
+		alles_im_gebiet bedeuet, dass der Aufrufer schon von sich aus sichergestellt hat,
+		dass alle Orte und Zentren innerhalb des Gebiets liegen.
+		"""
 		self.param = param
 		self.__gebiet = gebiet
 		self.__orte = frozenset(orte)
 		self.__zentren = frozenset(zentren)
-		self.__geschuetzte_orte = frozenset(self.__berechne_geschuetzte_orte(zentren, orte))
-		self.__ausserhalb_gebiet_orte = frozenset(self.__berechne_ausserhalb_gebiet_orte(orte))
+		self.__geschuetzte_orte = frozenset(self.__berechne_geschuetzte_orte(self.__zentren, orte))
+		self.__ausserhalb_gebiet_orte = frozenset(
+			{} if alles_im_gebiet else self.__berechne_ausserhalb_gebiet_orte(orte)
+		)
 		self.__loss = 0
 		self.__auswerte_ort_abstand()
-		self.__auswerte_gebiet()
+		if not alles_im_gebiet:
+			self.__auswerte_gebiet()
 
 	def __berechne_ausserhalb_gebiet_orte(self, orte: set[TPunkt]) -> set[TPunkt]:
 		return {
@@ -33,7 +40,8 @@ class Besiedlungsplan:
 			if not self.__gebiet.ist_drin(o)
 		}
 
-	def __berechne_geschuetzte_orte(self, zentren: set[TPunkt], orte: set[TPunkt]) -> set[TPunkt]:
+	def __berechne_geschuetzte_orte(self, zentren: frozenset[TPunkt],
+			orte: set[TPunkt]) -> set[TPunkt]:
 		return {
 			o for o in orte
 			if any(

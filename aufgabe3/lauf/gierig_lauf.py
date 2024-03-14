@@ -1,36 +1,33 @@
-from modell import Besiedlungsplan, Gebiet, Parameter
+from random import random
+
+from modell import Besiedlungsplan, Gebiet, Parameter, TPunkt
 from beobachter import Plotter, Logger, Stats
 from optimierung import GierigOptimierer
 
 class GierigLauf:
+	
 	def tue(self):
+		gebiet = Gebiet.von_datei('input/siedler2.txt')
 		b = Besiedlungsplan(
-			Gebiet.von_datei('input/siedler1.txt'),
-			{
-				(0, 0),
-				(0, 1),
-				(0, 2),
-				(0, 3),
-				(0, 4),
-				(0, 10),
-				(0, 50),
-				(100, 5),
-				(184, 184),
-				(190, 192),
-				(150, 50),
-				(120, 80),
-				(120, 70),
-				(115, 95),
-				(115, 105),
-				(200, 105),
-				(200, 96),
-			},
-			{(200, 100)},
-			Parameter()
+			gebiet,
+			{self.__hole_ort(gebiet) for _ in range(80)},
+			{self.__hole_ort(gebiet) for _ in range(1)},
+			Parameter(),
+			alles_im_gebiet=True
 		)
 		lauf_name = __class__.__name__
 		GierigOptimierer(b, [
 			Logger(lauf_name),
 			Stats(lauf_name),
 			Plotter(lauf_name)
-		], 10).tue()
+		], 300).tue()
+
+	def __hole_ort(self, g: Gebiet) -> TPunkt:
+		xs, ys = zip(*g.hole_eckpunkte())
+		min_x, max_x = min(*xs), max(*xs)
+		min_y, max_y = min(*ys), max(*ys)
+		while True:
+			x = (max_x - min_x) * random() + min_x
+			y = (max_y - min_y) * random() + min_y
+			if g.ist_drin((x, y)):
+				return x, y
