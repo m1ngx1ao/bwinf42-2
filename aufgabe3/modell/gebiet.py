@@ -5,14 +5,15 @@ import itertools as it
 from .types import TPunkt
 
 class Gebiet:
-	def __init__(self, linienzug: list[TPunkt]):
+	def __init__(self, linienzug: list[TPunkt], name: str = ''):
 		assert linienzug[0] == linienzug[-1]
 		self.__linienzug = linienzug
 		self.__eckpunkte = frozenset(self.__linienzug)
+		self.__name = name
 
 	@staticmethod
 	def von_datei(datei_name: str) -> Gebiet:
-		with open(datei_name, 'r') as f:
+		with open(f'input/{datei_name}.txt', 'r') as f:
 			input_str = f.read()
 			f.close()
 		ecken = input_str.split('\n')[1:]
@@ -21,7 +22,7 @@ class Gebiet:
 		return Gebiet([
 			TPunkt([float(e) for e in ecke.split(' ')])
 			for ecke in ecken
-		])
+		], datei_name)
 
 	def ist_drin(self, p: TPunkt):
 		"""
@@ -65,3 +66,7 @@ class Gebiet:
 
 	def hole_eckpunkte(self) -> frozenset[TPunkt]:
 		return self.__eckpunkte
+
+	def hole_name(self) -> str:
+		return self.__name
+	

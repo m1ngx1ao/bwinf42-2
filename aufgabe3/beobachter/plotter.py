@@ -33,17 +33,19 @@ class Plotter(Beobachter):
 	ZENTRUM_RADIUS = 3
 	ZENTRUM_FARBE = 'black'
 
-	def __init__(self, lauf_name):
+	def __init__(self):
 		self.__fenster = tk.Tk()
-		self.__pfad_name = super()._vorbereite_output_folder(lauf_name, 'karten')
 		breite = Plotter.BREITE + Plotter.RAND * 2
 		hoehe = Plotter.HOEHE + Plotter.RAND * 2
-		self.__iter_num = 0
 		self.__fenster.geometry(f'{ breite }x{ hoehe }')
 		self.__canvas = tk.Canvas(self.__fenster, width=breite, height=hoehe)
 		self.__canvas.pack()
 
-	def melde(self, b: Besiedlungsplan):
+	def optimierer_start(self, b: Besiedlungsplan, strategie: str, system: str):
+		self.__iter_num = 0
+		self.__pfad_name_opt = super()._vorbereite_output_folder_opt(b, strategie, system, 'karten')
+
+	def optimierer_iteration(self, b: Besiedlungsplan):
 		"""
 		Normalisiert, das heisst, der linkeste obendste
 		Punkt ist auf links oben auf dem Schaubild abgebildet,
@@ -62,10 +64,30 @@ class Plotter(Beobachter):
 		self.__male_zentren(trafo, b)
 		self.__male_orte(trafo, b)
 		self.__fenster.update()
-		self.__speichere_canvas_to_file(self.__pfad_name, self.__iter_num)
+		self.__speichere_canvas_to_file(self.__pfad_name_opt, self.__iter_num)
 
-	def finalisiere(self):
+	def optimierer_ende(self):
 		#self.__fenster.mainloop()
+		...
+
+	def lauf_start(self, b: Besiedlungsplan, strategie: str, system: str):
+		self.__pfad_name_lauf = super()._vorbereite_output_folder_lauf(b, strategie, system, 'karten')
+
+	def lauf_loesung(self, b: Besiedlungsplan, iter_num_letzte: int):
+		# z.B. output/siedler1/gierig/lauf/karten/20.png
+		self.__iter_num += 1
+		self.__canvas.delete('all')
+		trafo = Trafo(
+			b.hole_gebiet().hole_eckpunkte() | b.hole_orte() | b.hole_zentren(),
+			Plotter.RAND, Plotter.BREITE, Plotter.HOEHE
+		)
+		self.__male_gebiet(trafo, b)
+		self.__male_zentren(trafo, b)
+		self.__male_orte(trafo, b)
+		self.__fenster.update()
+		self.__speichere_canvas_to_file(self.__pfad_name_lauf, len(b.hole_orte()))
+
+	def lauf_ende(self):
 		...
 
 	def __male_gebiet(self, trafo: Trafo, b: Besiedlungsplan):

@@ -27,5 +27,6 @@
 		"--disable=trailing-whitespace",
 		"--disable=unnecessary-lambda-assignment",
 		"--disable=unspecified-encoding",
+		"--disable=attribute-defined-outside-init",
 	]
 }

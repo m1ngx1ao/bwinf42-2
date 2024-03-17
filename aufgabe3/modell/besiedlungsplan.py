@@ -15,7 +15,7 @@ class Besiedlungsplan:
 
 	LOSS_AUSSERHALB_GEBIET = 50
 
-	def __init__(self, gebiet: Gebiet, orte: set[TPunkt],
+	def __init__(self, gebiet: Gebiet, orte: set[TPunkt] | frozenset[TPunkt],
 			zentren: set[TPunkt] | frozenset[TPunkt], param: Parameter, alles_im_gebiet: bool = False):
 		"""
 		alles_im_gebiet bedeuet, dass der Aufrufer schon von sich aus sichergestellt hat,
@@ -25,23 +25,23 @@ class Besiedlungsplan:
 		self.__gebiet = gebiet
 		self.__orte = frozenset(orte)
 		self.__zentren = frozenset(zentren)
-		self.__geschuetzte_orte = frozenset(self.__berechne_geschuetzte_orte(self.__zentren, orte))
+		self.__geschuetzte_orte = frozenset(self.__berechne_geschuetzte_orte(self.__zentren, self.__orte))
 		self.__ausserhalb_gebiet_orte = frozenset(
-			{} if alles_im_gebiet else self.__berechne_ausserhalb_gebiet_orte(orte)
+			{} if alles_im_gebiet else self.__berechne_ausserhalb_gebiet_orte(self.__orte)
 		)
 		self.__loss = 0
 		self.__auswerte_ort_abstand()
 		if not alles_im_gebiet:
 			self.__auswerte_gebiet()
 
-	def __berechne_ausserhalb_gebiet_orte(self, orte: set[TPunkt]) -> set[TPunkt]:
+	def __berechne_ausserhalb_gebiet_orte(self, orte: frozenset[TPunkt]) -> set[TPunkt]:
 		return {
 			o for o in orte
 			if not self.__gebiet.ist_drin(o)
 		}
 
 	def __berechne_geschuetzte_orte(self, zentren: frozenset[TPunkt],
-			orte: set[TPunkt]) -> set[TPunkt]:
+			orte: frozenset[TPunkt]) -> set[TPunkt]:
 		return {
 			o for o in orte
 			if any(
@@ -70,7 +70,24 @@ class Besiedlungsplan:
 		bx, by = b
 		return math.sqrt(pow(bx - ax, 2) + pow(by - ay, 2))
 
+	def __gebe_str(self, name: str, s: frozenset) -> str:
+		ergebnis = name + ':\n'
+		if not s:
+			ergebnis += 'keine\n'
+		else:
+			for z in s:
+				ergebnis += str(z) + '\n'
+		ergebnis += '\n'
+		return ergebnis
+
 	# OVERRIDES
+	def __str__(self) -> str:
+		return 'Gebiet:\n' + self.__gebiet.hole_name() + '\n\n' + \
+			self.__gebe_str('Gesundheitszentren', self.__zentren) + \
+			self.__gebe_str('Ortschaften', self.__orte) + \
+			self.__gebe_str('zunahe Ortschaften', self.__zunahe_orte) + \
+			self.__gebe_str('geschuetzte Ortschaften', self.__geschuetzte_orte)  + \
+			self.__gebe_str('Ortschaften ausserhalb dem Gebiet', self.__ausserhalb_gebiet_orte)
 
 	def __lt__(self, other: Besiedlungsplan) -> bool:
 		return self.__loss < other.hole_loss()
