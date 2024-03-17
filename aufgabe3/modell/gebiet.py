@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import itertools as it
+from random import random
 
 from .types import TPunkt
 
@@ -55,6 +56,16 @@ class Gebiet:
 				if sx < px:
 					anzahl_schnittpunkte += 1
 		return anzahl_schnittpunkte % 2 == 1
+
+	def zufaelliger_punkt(self) -> TPunkt:
+		xs, ys = zip(*self.__eckpunkte)
+		min_x, max_x = min(*xs), max(*xs)
+		min_y, max_y = min(*ys), max(*ys)
+		while True:
+			x = (max_x - min_x) * random() + min_x
+			y = (max_y - min_y) * random() + min_y
+			if self.ist_drin((x, y)):
+				return x, y
 
 	# GETTER
 

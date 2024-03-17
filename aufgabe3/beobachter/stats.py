@@ -8,10 +8,12 @@ class Stats(Beobachter):
 	def __ausgabe(self, l: list[str | float | int], ort: io.TextIOWrapper):
 		ort.write(','.join(str(e) for e in l) + '\n')
 
-	def optimierer_start(self, b: Besiedlungsplan, strategie: str, system: str):
+	# OPTIMIERER
+		
+	def optimierer_start(self, plan: Besiedlungsplan, strategie: str):
 		self.__iter_num = 0
-		pfad = super()._vorbereite_output_file_opt(b, strategie, system, 'stats.csv')
-		self.__f = open(pfad, 'w')
+		pfad = super()._vorbereite_output_file(plan, strategie, self.MODUL_OPTIMIERER, 'stats.csv')
+		self.__f_opt = open(pfad, 'w')
 		self.__ausgabe([
 			'Iteration',
 			'Loss',
@@ -19,38 +21,40 @@ class Stats(Beobachter):
 			'#OrtschaftenNichtImGebiet',
 			'#Ortschaften',
 			'#Gesundheitszentren'
-		], self.__f)
+		], self.__f_opt)
 
-	def optimierer_iteration(self, b: Besiedlungsplan):
+	def optimierer_iteration(self, plan: Besiedlungsplan):
 		self.__iter_num += 1
 		self.__ausgabe([
 			self.__iter_num,
-			b.hole_loss(),
-			len(b.hole_zunahe_orte()),
-			len(b.hole_ausserhalb_gebiet_orte()),
-			len(b.hole_orte()),
-			len(b.hole_zentren())
-		], self.__f)
+			plan.hole_loss(),
+			len(plan.hole_zunahe_orte()),
+			len(plan.hole_ausserhalb_gebiet_orte()),
+			len(plan.hole_orte()),
+			len(plan.hole_zentren())
+		], self.__f_opt)
 		
 	def optimierer_ende(self):
-		self.__f.close()
+		self.__f_opt.close()
 	
-	def lauf_start(self, b: Besiedlungsplan, strategie: str, system: str):
-		# output/siedler/gierig/lauf/stats.csv
-		pfad = super()._vorbereite_output_file_lauf(b, strategie, system, 'stats.csv')
-		self.__h = open(pfad, 'w')
+	# LAUF
+
+	def lauf_start(self, plan: Besiedlungsplan, strategie: str):
+		# z.B. output/siedler2/gierig/lauf/stats.csv
+		pfad = super()._vorbereite_output_file(plan, strategie, self.MODUL_LAUF, 'stats.csv')
+		self.__f_lauf = open(pfad, 'w')
 		self.__ausgabe([
 			'#Ortschaften',
 			'#Gesundheitszentren',
-			'benoetigte Iterationen fuer letzten Plan'
-		], self.__h)
+			'#BenoetigteIterationen'
+		], self.__f_lauf)
 
-	def lauf_loesung(self, b: Besiedlungsplan, iter_num_letzte: int):
+	def lauf_loesung(self, plan: Besiedlungsplan, benoetigte_iter_num: int):
 		self.__ausgabe([
-			len(b.hole_orte()),
-			len(b.hole_zentren()),
-			iter_num_letzte
-		], self.__h)
+			len(plan.hole_orte()),
+			len(plan.hole_zentren()),
+			benoetigte_iter_num
+		], self.__f_lauf)
 
 	def lauf_ende(self):
-		self.__h.close()
+		self.__f_lauf.close()

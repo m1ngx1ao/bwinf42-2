@@ -6,9 +6,15 @@ from modell import Besiedlungsplan, TPunkt
 from .beobachter import Beobachter
 
 class Trafo:
-	def __init__(self, orte: frozenset[TPunkt],
+	"""
+	Nimmt die Punkte des Besiedlungsplans (Ortschaften, Zentren, Gebietseckpunkte)
+	und berechnet basierend auf der Canvas-Groesse eine Transformation ("Trafo"),
+	welche die Punktkoordinaten so normalisiert, dass die Canvas genau vollstaendig
+	ausgenutzt wird.
+	"""
+	def __init__(self, punkte: frozenset[TPunkt],
 			rand: float, breite: float, hoehe: float):
-		xs, ys = zip(*orte)
+		xs, ys = zip(*punkte)
 		self.min_x, self.max_x = min(xs), max(xs)
 		self.min_y, self.max_y = min(ys), max(ys)
 		self.zoom_x = breite / (self.max_x - self.min_x)
@@ -41,68 +47,68 @@ class Plotter(Beobachter):
 		self.__canvas = tk.Canvas(self.__fenster, width=breite, height=hoehe)
 		self.__canvas.pack()
 
-	def optimierer_start(self, b: Besiedlungsplan, strategie: str, system: str):
-		self.__iter_num = 0
-		self.__pfad_name_opt = super()._vorbereite_output_folder_opt(b, strategie, system, 'karten')
+	# OPTIMIERER
 
-	def optimierer_iteration(self, b: Besiedlungsplan):
-		"""
-		Normalisiert, das heisst, der linkeste obendste
-		Punkt ist auf links oben auf dem Schaubild abgebildet,
-		der rechts unteste Punkt ist entsprechend 
-		soweit wie moeglich rechts unten auf dem Schaubild abgebildet,
-		damit es sich besser anschauen laesst.
-		Der Punkt (0,0) befindet sich oben links.
-		"""
+	def optimierer_start(self, plan: Besiedlungsplan, strategie: str):
+		self.__iter_num = 0
+		self.__pfad_opt = super()._vorbereite_output_folder(
+			plan, strategie, self.MODUL_OPTIMIERER, 'karten')
+
+	def optimierer_iteration(self, plan: Besiedlungsplan):
 		self.__iter_num += 1
-		self.__canvas.delete('all')
-		trafo = Trafo(
-			b.hole_gebiet().hole_eckpunkte() | b.hole_orte() | b.hole_zentren(),
-			Plotter.RAND, Plotter.BREITE, Plotter.HOEHE
-		)
-		self.__male_gebiet(trafo, b)
-		self.__male_zentren(trafo, b)
-		self.__male_orte(trafo, b)
-		self.__fenster.update()
-		self.__speichere_canvas_to_file(self.__pfad_name_opt, self.__iter_num)
+		self.__male(plan)
+		self.__speichere_canvas_zu_file(self.__pfad_opt, self.__iter_num)
 
 	def optimierer_ende(self):
+		...
+
+	# LAUF
+
+	def lauf_start(self, plan: Besiedlungsplan, strategie: str):
+		self.__pfad_lauf = super()._vorbereite_output_folder(
+			plan, strategie, self.MODUL_LAUF, 'karten')
+
+	def lauf_loesung(self, plan: Besiedlungsplan, benoetigte_iter_num: int):
+		# z.B. output/siedler1/gierig/lauf/karten/20.png
+		self.__male(plan)
+		self.__speichere_canvas_zu_file(self.__pfad_lauf, len(plan.hole_orte()))
+
+	def lauf_ende(self):
 		#self.__fenster.mainloop()
 		...
 
-	def lauf_start(self, b: Besiedlungsplan, strategie: str, system: str):
-		self.__pfad_name_lauf = super()._vorbereite_output_folder_lauf(b, strategie, system, 'karten')
+	# PRIVATE
 
-	def lauf_loesung(self, b: Besiedlungsplan, iter_num_letzte: int):
-		# z.B. output/siedler1/gierig/lauf/karten/20.png
-		self.__iter_num += 1
+	def __male(self, plan: Besiedlungsplan):
+		"""
+		Der Plan wird normalisiert gemalt, d.h.
+		der linkeste (oberste) Punkt ist
+		ist auf dem Schaubild links (oben) abgebildet,
+		entsprechend dasselbe fuer rechts und unten.
+		"""
 		self.__canvas.delete('all')
 		trafo = Trafo(
-			b.hole_gebiet().hole_eckpunkte() | b.hole_orte() | b.hole_zentren(),
+			plan.hole_gebiet().hole_eckpunkte() | plan.hole_orte() | plan.hole_zentren(),
 			Plotter.RAND, Plotter.BREITE, Plotter.HOEHE
 		)
-		self.__male_gebiet(trafo, b)
-		self.__male_zentren(trafo, b)
-		self.__male_orte(trafo, b)
+		self.__male_gebiet(trafo, plan)
+		self.__male_zentren(trafo, plan)
+		self.__male_orte(trafo, plan)
 		self.__fenster.update()
-		self.__speichere_canvas_to_file(self.__pfad_name_lauf, len(b.hole_orte()))
 
-	def lauf_ende(self):
-		...
-
-	def __male_gebiet(self, trafo: Trafo, b: Besiedlungsplan):
+	def __male_gebiet(self, trafo: Trafo, plan: Besiedlungsplan):
 		xy_paare = []
-		for x, y in b.hole_gebiet().hole_linienzug():
+		for x, y in plan.hole_gebiet().hole_linienzug():
 			xy_paare.append(trafo.x(x))
 			xy_paare.append(trafo.y(y))
 		self.__canvas.create_polygon(*xy_paare, fill=Plotter.GEBIET_FARBE)
 
-	def __male_zentren(self, trafo: Trafo, b: Besiedlungsplan):
-		for x, y in b.hole_zentren():
+	def __male_zentren(self, trafo: Trafo, plan: Besiedlungsplan):
+		for x, y in plan.hole_zentren():
 			trafo_x = trafo.x(x)
 			trafo_y = trafo.y(y)
-			trafo_radius_x = trafo.zoom_x * b.param.schutz_zentrum_bis
-			trafo_radius_y = trafo.zoom_y * b.param.schutz_zentrum_bis
+			trafo_radius_x = trafo.zoom_x * plan.param.schutz_zentrum_bis
+			trafo_radius_y = trafo.zoom_y * plan.param.schutz_zentrum_bis
 			self.__canvas.create_oval(
 				trafo_x - trafo_radius_x,
 				trafo_y - trafo_radius_y,
@@ -117,16 +123,16 @@ class Plotter(Beobachter):
 				fill=Plotter.ZENTRUM_FARBE
 			)
 
-	def __male_orte(self, trafo: Trafo, b: Besiedlungsplan):
-		for o in b.hole_orte():
-			if o in b.hole_zunahe_orte():
-				if o in b.hole_geschuetzte_orte():
+	def __male_orte(self, trafo: Trafo, plan: Besiedlungsplan):
+		for o in plan.hole_orte():
+			if o in plan.hole_zunahe_orte():
+				if o in plan.hole_geschuetzte_orte():
 					innen = Plotter.ORTSCHAFT_FARBE_ZUNAHE_MIT_SCHUTZ
 				else:
 					innen = Plotter.ORTSCHAFT_FARBE_ZUNAHE_OHNE_SCHUTZ
 			else:
 				innen = Plotter.ORTSCHAFT_FARBE_GUELTIG
-			if o in b.hole_ausserhalb_gebiet_orte():
+			if o in plan.hole_ausserhalb_gebiet_orte():
 				rand = Plotter.ORTSCHAFT_RAND_AUSSERHALB_GEBIET
 			else:
 				rand = Plotter.ORTSCHAFT_RAND_IM_GEBIET
@@ -142,9 +148,9 @@ class Plotter(Beobachter):
 				outline=rand
 			)
 
-	def __speichere_canvas_to_file(self, pfad_name: str, iter_num: int):
+	def __speichere_canvas_zu_file(self, pfad_name: str, index: int):
 		eps_name = f'{ pfad_name }.eps'
 		self.__canvas.postscript(file = eps_name)
-		png_name = ('0000' + str(iter_num))[-5:]
+		png_name = ('00' + str(index))[-3:]
 		Image.open(eps_name).save(f'{pfad_name}/{png_name}.png', 'png')
 		os.remove(eps_name)

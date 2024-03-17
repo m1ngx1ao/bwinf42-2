@@ -14,9 +14,16 @@ class Besiedlungsplan:
 	"""
 
 	LOSS_AUSSERHALB_GEBIET = 50
+	"""
+	Fester Loss fuer Ortschaft ausserhalb des Gebiets
+	unabhaengig vom Abstand zu Gebietsgrenzen
+	Wird in Optimierung nicht verwendet, da nur Punkte innerhalb des Gebiets
+	gesetzt und verschoben werden.
+	"""
 
 	def __init__(self, gebiet: Gebiet, orte: set[TPunkt] | frozenset[TPunkt],
-			zentren: set[TPunkt] | frozenset[TPunkt], param: Parameter, alles_im_gebiet: bool = False):
+			zentren: set[TPunkt] | frozenset[TPunkt], param: Parameter,
+			alles_im_gebiet: bool = False):
 		"""
 		alles_im_gebiet bedeuet, dass der Aufrufer schon von sich aus sichergestellt hat,
 		dass alle Orte und Zentren innerhalb des Gebiets liegen.
@@ -70,24 +77,19 @@ class Besiedlungsplan:
 		bx, by = b
 		return math.sqrt(pow(bx - ax, 2) + pow(by - ay, 2))
 
-	def __gebe_str(self, name: str, s: frozenset) -> str:
-		ergebnis = name + ':\n'
-		if not s:
-			ergebnis += 'keine\n'
-		else:
-			for z in s:
-				ergebnis += str(z) + '\n'
-		ergebnis += '\n'
-		return ergebnis
+	def __set_zu_str(self, name: str, s: set | frozenset) -> str:
+		return f'{name}:\n' + '\n'.join(str(z) for z in s)
 
 	# OVERRIDES
 	def __str__(self) -> str:
-		return 'Gebiet:\n' + self.__gebiet.hole_name() + '\n\n' + \
-			self.__gebe_str('Gesundheitszentren', self.__zentren) + \
-			self.__gebe_str('Ortschaften', self.__orte) + \
-			self.__gebe_str('zunahe Ortschaften', self.__zunahe_orte) + \
-			self.__gebe_str('geschuetzte Ortschaften', self.__geschuetzte_orte)  + \
-			self.__gebe_str('Ortschaften ausserhalb dem Gebiet', self.__ausserhalb_gebiet_orte)
+		return '\n\n'.join([
+			self.__set_zu_str('Gebiet-Name', {self.__gebiet.hole_name()}),
+			self.__set_zu_str('Gesundheitszentren', self.__zentren),
+			self.__set_zu_str('Ortschaften', self.__orte),
+			self.__set_zu_str('zunahe Ortschaften', self.__zunahe_orte),
+			self.__set_zu_str('geschuetzte Ortschaften', self.__geschuetzte_orte),
+			self.__set_zu_str('Ortschaften ausserhalb dem Gebiet', self.__ausserhalb_gebiet_orte),
+		])
 
 	def __lt__(self, other: Besiedlungsplan) -> bool:
 		return self.__loss < other.hole_loss()
