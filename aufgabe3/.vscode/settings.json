@@ -3,6 +3,7 @@
 		"editor.insertSpaces": false,
 		"editor.tabSize": 4  
 	},
+	"python.autoComplete.extraPaths": ["src"],
 	"python.testing.pytestArgs": [
 		"test"
 	],
@@ -28,5 +29,8 @@
 		"--disable=unnecessary-lambda-assignment",
 		"--disable=unspecified-encoding",
 		"--disable=attribute-defined-outside-init",
+	],
+	"python.analysis.extraPaths": [
+		"src"
 	]
 }
