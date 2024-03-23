@@ -35,6 +35,10 @@ def test_5orte_abstand_ueber20_horizontal_mit_schutz():
 		{(100, 100)}, Parameter())
 	assert not b.hole_zunahe_orte()
 
+def test_2orte_rechtsoben_linksunten_planquadrat():
+	b = Besiedlungsplan(gebiet(), {(25, 15), (15, 25)}, set(), Parameter())
+	assert b.hole_zunahe_orte()
+
 def test_2orte_abstand_10_mit_ohne_schutz():
 	"""
 	Wenn der Abstand zwischen 2 Punkten 10 betraegt, sich ein Punkt in der Schutzzone, der andere

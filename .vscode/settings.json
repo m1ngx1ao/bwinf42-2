@@ -32,5 +32,6 @@
 		"--disable=trailing-whitespace",
 		"--disable=unnecessary-lambda-assignment",
 		"--disable=unspecified-encoding",
-	]
+	],
+	"git.ignoreLimitWarning": true
 }

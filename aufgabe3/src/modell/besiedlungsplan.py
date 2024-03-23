@@ -59,7 +59,31 @@ class Besiedlungsplan:
 
 	def __auswerte_ort_abstand(self):
 		zunahe_orte = set()
-		for o1, o2 in list(it.combinations(self.__orte, 2)):
+		# Einteilung in Planquadrate
+		planquadrat = {}
+		for x, y in self.__orte:
+			px = x // self.param.sicher_abstand_ab
+			py = y // self.param.sicher_abstand_ab
+			p = px, py
+			if p not in planquadrat:
+				planquadrat[p] = []
+			planquadrat[p].append((x, y))
+		# Vergleich der Punkte eines jeden Planquadrats mit sich selbst
+		# und mit denen der Planquadrate rechts, linksunten, unten, rechtsunten
+		# Dies reicht aus, da
+		# - sonst keine zu geringen Abstaende vorhanden sein koennen
+		# - die Vergleich in eine Richtung fuer jedes Punktepaar benoetigt wird
+		#   (also kein Vergleich mit Planquadraten, die links oder zum Teil oben sind)
+		kombinationen = []
+		for (px, py), orte in planquadrat.items():
+			kombinationen.extend(it.combinations(orte, 2))
+			kombinationen.extend([
+				(o1, o2)
+				for o1 in orte
+				for p2 in [(px + 1, py), (px, py + 1), (px + 1, py + 1), (px - 1, py + 1)]
+				for o2 in (planquadrat[p2] if p2 in planquadrat else [])
+			])
+		for o1, o2 in kombinationen:
 			erlaubter_abstand = self.param.min_abstand \
 				if {o1, o2} & self.__geschuetzte_orte \
 				else self.param.sicher_abstand_ab

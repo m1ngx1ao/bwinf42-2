@@ -6,13 +6,14 @@ from optimierung import GierigOptimierer
 
 class GierigLauf:
 	STRATEGIE = 'gierig'
-	BUDGET_ZENTREN = 3
-	BUDGET_MAX_LAUF_ITER = 20
+	BUDGET_MAX_LAUF_ITER = 80
 
-	def __init__(self, gebiet_name: str, beobachter: list[Beobachter], param: Parameter):
+	def __init__(self, gebiet_name: str, beobachter: list[Beobachter],
+			param: Parameter, budget_zentren: int = 3):
 		self.__gebiet = Gebiet.von_datei(gebiet_name)
 		self.__beobachter = beobachter
 		self.__param = param
+		self.__budget_zentren = budget_zentren
 
 	def tue(self):
 		plan = Besiedlungsplan(
@@ -24,14 +25,14 @@ class GierigLauf:
 		)
 		for b in self.__beobachter:
 			b.lauf_start(plan, self.STRATEGIE)
-		sollanzahl_zentren = 0
+		sollanzahl_zentren = len(plan.hole_zentren())
 		lauf_iter_num = 0
 		insg_opt_iter_num = 0
 		while True:
 			if lauf_iter_num == self.BUDGET_MAX_LAUF_ITER:
 				# gebe auf, bei aktueller Zentrenzahl die Ortzahl weiter zu steigern
 				# fuege stattdessen (wenn erlaubt) noch ein Zentrum hinzu
-				if sollanzahl_zentren == self.BUDGET_ZENTREN:
+				if sollanzahl_zentren == self.__budget_zentren:
 					for b in self.__beobachter:
 						b.lauf_ende()
 					return
