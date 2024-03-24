@@ -1,0 +1,98 @@
+Iteration 1:
+# Gesundheitszentren: 1
+# Ortschaften: 149
+# zu nahe Ortschaften: 3
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 2.819469253535762
+
+Iteration 2:
+# Gesundheitszentren: 1
+# Ortschaften: 149
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 1.5629646205751833
+
+Iteration 3:
+# Gesundheitszentren: 1
+# Ortschaften: 149
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 1.5629646205751833
+
+Iteration 4:
+# Gesundheitszentren: 1
+# Ortschaften: 149
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 1.5629646205751833
+
+Iteration 5:
+# Gesundheitszentren: 1
+# Ortschaften: 149
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.31251354295121914
+
+Iteration 6:
+# Gesundheitszentren: 1
+# Ortschaften: 149
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.31251354295121914
+
+Iteration 7:
+# Gesundheitszentren: 1
+# Ortschaften: 149
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.31251354295121914
+
+Iteration 8:
+# Gesundheitszentren: 1
+# Ortschaften: 149
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.31251354295121914
+
+Iteration 9:
+# Gesundheitszentren: 1
+# Ortschaften: 149
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.31251354295121914
+
+Iteration 10:
+# Gesundheitszentren: 1
+# Ortschaften: 149
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.31251354295121914
+
+Iteration 11:
+# Gesundheitszentren: 1
+# Ortschaften: 149
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.31251354295121914
+
+Iteration 12:
+# Gesundheitszentren: 1
+# Ortschaften: 149
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.31251354295121914
+
+Iteration 13:
+# Gesundheitszentren: 1
+# Ortschaften: 149
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.31251354295121914
+
+Iteration 14:
+# Gesundheitszentren: 1
+# Ortschaften: 149
+# zu nahe Ortschaften: 0
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0
+

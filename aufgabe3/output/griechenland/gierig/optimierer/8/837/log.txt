@@ -1,0 +1,28 @@
+Iteration 1:
+# Gesundheitszentren: 8
+# Ortschaften: 837
+# zu nahe Ortschaften: 3
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 5.666871759495047
+
+Iteration 2:
+# Gesundheitszentren: 8
+# Ortschaften: 837
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.4440604127515524
+
+Iteration 3:
+# Gesundheitszentren: 8
+# Ortschaften: 837
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.4440604127515524
+
+Iteration 4:
+# Gesundheitszentren: 8
+# Ortschaften: 837
+# zu nahe Ortschaften: 0
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0
+

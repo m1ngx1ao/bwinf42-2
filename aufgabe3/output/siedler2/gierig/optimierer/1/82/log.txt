@@ -1,0 +1,84 @@
+Iteration 1:
+# Gesundheitszentren: 1
+# Ortschaften: 82
+# zu nahe Ortschaften: 3
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 2.7786898513877745
+
+Iteration 2:
+# Gesundheitszentren: 1
+# Ortschaften: 82
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.24258561665403455
+
+Iteration 3:
+# Gesundheitszentren: 1
+# Ortschaften: 82
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.24258561665403455
+
+Iteration 4:
+# Gesundheitszentren: 1
+# Ortschaften: 82
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.24258561665403455
+
+Iteration 5:
+# Gesundheitszentren: 1
+# Ortschaften: 82
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.24258561665403455
+
+Iteration 6:
+# Gesundheitszentren: 1
+# Ortschaften: 82
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.24258561665403455
+
+Iteration 7:
+# Gesundheitszentren: 1
+# Ortschaften: 82
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.24258561665403455
+
+Iteration 8:
+# Gesundheitszentren: 1
+# Ortschaften: 82
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.24258561665403455
+
+Iteration 9:
+# Gesundheitszentren: 1
+# Ortschaften: 82
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.24258561665403455
+
+Iteration 10:
+# Gesundheitszentren: 1
+# Ortschaften: 82
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.24258561665403455
+
+Iteration 11:
+# Gesundheitszentren: 1
+# Ortschaften: 82
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.24258561665403455
+
+Iteration 12:
+# Gesundheitszentren: 1
+# Ortschaften: 82
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.24258561665403455
+

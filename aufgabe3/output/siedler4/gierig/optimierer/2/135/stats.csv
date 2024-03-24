@@ -1,0 +1,6 @@
+Iteration,Loss,#OrtschaftenZuNah,#OrtschaftenNichtImGebiet,#Ortschaften,#Gesundheitszentren
+1,2.0054399951851885,2,0,135,2
+2,0.9659476575413244,2,0,135,2
+3,0.9659476575413244,2,0,135,2
+4,0.9659476575413244,2,0,135,2
+5,0,0,0,135,2

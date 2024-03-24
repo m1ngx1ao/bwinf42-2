@@ -1,0 +1,98 @@
+Iteration 1:
+# Gesundheitszentren: 0
+# Ortschaften: 28
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 13.656046691899293
+
+Iteration 2:
+# Gesundheitszentren: 0
+# Ortschaften: 28
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 12.899446621148455
+
+Iteration 3:
+# Gesundheitszentren: 0
+# Ortschaften: 28
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 9.706998950606282
+
+Iteration 4:
+# Gesundheitszentren: 0
+# Ortschaften: 28
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 6.957285054252107
+
+Iteration 5:
+# Gesundheitszentren: 0
+# Ortschaften: 28
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 6.957285054252107
+
+Iteration 6:
+# Gesundheitszentren: 0
+# Ortschaften: 28
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 6.957285054252107
+
+Iteration 7:
+# Gesundheitszentren: 0
+# Ortschaften: 28
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 6.957285054252107
+
+Iteration 8:
+# Gesundheitszentren: 0
+# Ortschaften: 28
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 6.957285054252107
+
+Iteration 9:
+# Gesundheitszentren: 0
+# Ortschaften: 28
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 6.957285054252107
+
+Iteration 10:
+# Gesundheitszentren: 0
+# Ortschaften: 28
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 6.957285054252107
+
+Iteration 11:
+# Gesundheitszentren: 0
+# Ortschaften: 28
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 6.957285054252107
+
+Iteration 12:
+# Gesundheitszentren: 0
+# Ortschaften: 28
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 6.957285054252107
+
+Iteration 13:
+# Gesundheitszentren: 0
+# Ortschaften: 28
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 6.957285054252107
+
+Iteration 14:
+# Gesundheitszentren: 0
+# Ortschaften: 28
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 6.957285054252107
+

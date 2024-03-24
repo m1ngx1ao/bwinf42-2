@@ -1,0 +1,98 @@
+Iteration 1:
+# Gesundheitszentren: 1
+# Ortschaften: 105
+# zu nahe Ortschaften: 3
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 2.841218292491746
+
+Iteration 2:
+# Gesundheitszentren: 1
+# Ortschaften: 105
+# zu nahe Ortschaften: 3
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 2.841218292491746
+
+Iteration 3:
+# Gesundheitszentren: 1
+# Ortschaften: 105
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 2.735379912549278
+
+Iteration 4:
+# Gesundheitszentren: 1
+# Ortschaften: 105
+# zu nahe Ortschaften: 3
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 1.6195910636592696
+
+Iteration 5:
+# Gesundheitszentren: 1
+# Ortschaften: 105
+# zu nahe Ortschaften: 3
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 1.6195910636592696
+
+Iteration 6:
+# Gesundheitszentren: 1
+# Ortschaften: 105
+# zu nahe Ortschaften: 3
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 1.6195910636592696
+
+Iteration 7:
+# Gesundheitszentren: 1
+# Ortschaften: 105
+# zu nahe Ortschaften: 3
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 1.6195910636592696
+
+Iteration 8:
+# Gesundheitszentren: 1
+# Ortschaften: 105
+# zu nahe Ortschaften: 3
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 1.6195910636592696
+
+Iteration 9:
+# Gesundheitszentren: 1
+# Ortschaften: 105
+# zu nahe Ortschaften: 3
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 1.6195910636592696
+
+Iteration 10:
+# Gesundheitszentren: 1
+# Ortschaften: 105
+# zu nahe Ortschaften: 3
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 1.6195910636592696
+
+Iteration 11:
+# Gesundheitszentren: 1
+# Ortschaften: 105
+# zu nahe Ortschaften: 3
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 1.6195910636592696
+
+Iteration 12:
+# Gesundheitszentren: 1
+# Ortschaften: 105
+# zu nahe Ortschaften: 3
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 1.6195910636592696
+
+Iteration 13:
+# Gesundheitszentren: 1
+# Ortschaften: 105
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.5876059745089215
+
+Iteration 14:
+# Gesundheitszentren: 1
+# Ortschaften: 105
+# zu nahe Ortschaften: 0
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0
+

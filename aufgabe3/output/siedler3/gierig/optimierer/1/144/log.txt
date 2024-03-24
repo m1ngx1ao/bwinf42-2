@@ -1,0 +1,98 @@
+Iteration 1:
+# Gesundheitszentren: 1
+# Ortschaften: 144
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 2.804160054161862
+
+Iteration 2:
+# Gesundheitszentren: 1
+# Ortschaften: 144
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 2.804160054161862
+
+Iteration 3:
+# Gesundheitszentren: 1
+# Ortschaften: 144
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 2.804160054161862
+
+Iteration 4:
+# Gesundheitszentren: 1
+# Ortschaften: 144
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 2.804160054161862
+
+Iteration 5:
+# Gesundheitszentren: 1
+# Ortschaften: 144
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 2.804160054161862
+
+Iteration 6:
+# Gesundheitszentren: 1
+# Ortschaften: 144
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 2.804160054161862
+
+Iteration 7:
+# Gesundheitszentren: 1
+# Ortschaften: 144
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 2.804160054161862
+
+Iteration 8:
+# Gesundheitszentren: 1
+# Ortschaften: 144
+# zu nahe Ortschaften: 2
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 1.0612101265136982
+
+Iteration 9:
+# Gesundheitszentren: 1
+# Ortschaften: 144
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.8886685209383351
+
+Iteration 10:
+# Gesundheitszentren: 1
+# Ortschaften: 144
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.8886685209383351
+
+Iteration 11:
+# Gesundheitszentren: 1
+# Ortschaften: 144
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.8886685209383351
+
+Iteration 12:
+# Gesundheitszentren: 1
+# Ortschaften: 144
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.8886685209383351
+
+Iteration 13:
+# Gesundheitszentren: 1
+# Ortschaften: 144
+# zu nahe Ortschaften: 4
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0.8886685209383351
+
+Iteration 14:
+# Gesundheitszentren: 1
+# Ortschaften: 144
+# zu nahe Ortschaften: 0
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 0
+

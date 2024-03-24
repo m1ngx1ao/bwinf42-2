@@ -1,0 +1,19 @@
+Gebiet-Name:
+siedler2
+
+Gesundheitszentren:
+
+
+Ortschaften:
+(76.16778689373226, 21.468890722184213)
+(-35.483652068686844, -4.620939606045454)
+(-23.355689847762434, -30.18501513572427)
+(-3.4084383509767235, 16.907782461455184)
+
+zunahe Ortschaften:
+
+
+geschuetzte Ortschaften:
+
+
+Ortschaften ausserhalb dem Gebiet:

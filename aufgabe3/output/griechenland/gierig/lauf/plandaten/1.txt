@@ -1,0 +1,16 @@
+Gebiet-Name:
+griechenland
+
+Gesundheitszentren:
+
+
+Ortschaften:
+(306.56142884412105, 357.7209410122304)
+
+zunahe Ortschaften:
+
+
+geschuetzte Ortschaften:
+
+
+Ortschaften ausserhalb dem Gebiet:

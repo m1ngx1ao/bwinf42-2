@@ -1,0 +1,98 @@
+Iteration 1:
+# Gesundheitszentren: 4
+# Ortschaften: 591
+# zu nahe Ortschaften: 5
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 17.339285984405052
+
+Iteration 2:
+# Gesundheitszentren: 4
+# Ortschaften: 591
+# zu nahe Ortschaften: 5
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 17.339285984405052
+
+Iteration 3:
+# Gesundheitszentren: 4
+# Ortschaften: 591
+# zu nahe Ortschaften: 5
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 16.11909094764787
+
+Iteration 4:
+# Gesundheitszentren: 4
+# Ortschaften: 591
+# zu nahe Ortschaften: 6
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 13.367952254689037
+
+Iteration 5:
+# Gesundheitszentren: 4
+# Ortschaften: 591
+# zu nahe Ortschaften: 6
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 13.367952254689037
+
+Iteration 6:
+# Gesundheitszentren: 4
+# Ortschaften: 591
+# zu nahe Ortschaften: 6
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 13.367952254689037
+
+Iteration 7:
+# Gesundheitszentren: 4
+# Ortschaften: 591
+# zu nahe Ortschaften: 6
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 13.367952254689037
+
+Iteration 8:
+# Gesundheitszentren: 4
+# Ortschaften: 591
+# zu nahe Ortschaften: 6
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 13.367952254689037
+
+Iteration 9:
+# Gesundheitszentren: 4
+# Ortschaften: 591
+# zu nahe Ortschaften: 6
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 13.367952254689037
+
+Iteration 10:
+# Gesundheitszentren: 4
+# Ortschaften: 591
+# zu nahe Ortschaften: 6
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 13.367952254689037
+
+Iteration 11:
+# Gesundheitszentren: 4
+# Ortschaften: 591
+# zu nahe Ortschaften: 6
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 13.367952254689037
+
+Iteration 12:
+# Gesundheitszentren: 4
+# Ortschaften: 591
+# zu nahe Ortschaften: 6
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 13.367952254689037
+
+Iteration 13:
+# Gesundheitszentren: 4
+# Ortschaften: 591
+# zu nahe Ortschaften: 6
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 13.367952254689037
+
+Iteration 14:
+# Gesundheitszentren: 4
+# Ortschaften: 591
+# zu nahe Ortschaften: 6
+# Ortschaften ausserhalb Gebiet: 0
+Loss: 13.367952254689037
+
