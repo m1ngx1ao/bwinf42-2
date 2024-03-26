@@ -153,7 +153,7 @@ Dafür wurde ein *sechstes* Gebiet erstellt und der Evaluationsreihe hinzugefüg
 | :--: |
 | Zusätzliches Siedlungsgebiet: Griechisches Festland als *165-Eck* im korrekten Maßstab *(km)*, <br> also mit einer Achsenlänge von *fast 600* |
 
-Für jedes Siedlungsgebiet wurde je ein Optimierungslauf auf einem Desktop PC mit dem *AMD FX8330* Prozessor durchgeführt. Dabei wurde Standard-Python im Terminal verwendet und auf Compilierung mit etwa *Cython* oder *PyPy* verzichtet. Die Dauer pro Lauf ist wiefolgt:
+Für jedes Siedlungsgebiet wurde je ein Optimierungslauf auf einem Desktop PC mit dem *AMD FX8330* Prozessor durchgeführt. Dabei wurde Standard-Python im Terminal verwendet und auf Compilierung mit etwa *Cython* oder *PyPy* verzichtet. Die Dauer pro Lauf ist wie folgt:
 
 | Gebiet | Siedler1 | Siedler2 | Siedler3 | Siedler4 | Siedler5 | Griechenland |
 | -- | --: | --: | --: | --: | --: | --: |
@@ -225,8 +225,8 @@ Die zugehörigen Plankarten sind im Folgenden abgebildet.
 
 | #&nbsp;Zentren | 0 | 1 | 2 | 3 | 4 |
 | :--: | :--: | :--: | :--: | :--: | :--: |
-| $0+...$ | ![gk0](output/griechenland/gierig/lauf/karten/257.png) | ![gk1](output/griechenland/gierig/lauf/karten/366.png) | ![gk2](output/griechenland/gierig/lauf/karten/420.png) | ![gk3](output/griechenland/gierig/lauf/karten/499.png) | ![gk4](output/griechenland/gierig/lauf/karten/621.png) |
-| $5+...$ | ![gk5](output/griechenland/gierig/lauf/karten/707.png) | ![gk6](output/griechenland/gierig/lauf/karten/765.png) | ![gk7](output/griechenland/gierig/lauf/karten/800.png) | ![gk8](output/griechenland/gierig/lauf/karten/838.png) | ![gk9](output/griechenland/gierig/lauf/karten/851.png) |
+| 0+ | ![gk0](output/griechenland/gierig/lauf/karten/257.png) | ![gk1](output/griechenland/gierig/lauf/karten/366.png) | ![gk2](output/griechenland/gierig/lauf/karten/420.png) | ![gk3](output/griechenland/gierig/lauf/karten/499.png) | ![gk4](output/griechenland/gierig/lauf/karten/621.png) |
+| 5+ | ![gk5](output/griechenland/gierig/lauf/karten/707.png) | ![gk6](output/griechenland/gierig/lauf/karten/765.png) | ![gk7](output/griechenland/gierig/lauf/karten/800.png) | ![gk8](output/griechenland/gierig/lauf/karten/838.png) | ![gk9](output/griechenland/gierig/lauf/karten/851.png) |
 
 Aus den Plankarten lassen sich folgende Erkenntnisse gewinnen:
 * Die *konkaven* Elemente und der *stark zerklüftete* Küstenverlauf des Siedlungsgebiets werden durch den Lösungsansatz sehr gut *berücksichtigt*. Dies zeigt sich z.B. an der Ausnutzung der anspruchsvollen Halbinseln [Chalkidiki](https://de.wikipedia.org/wiki/Chalkidiki) und den [Peloponnes](https://de.wikipedia.org/wiki/Peloponnes).
@@ -259,7 +259,7 @@ Dieses Beispiel zeigt, wie die Verschiebung eines Gesundheitszentrums über den 
 | Iteration *1* | Iteration *2* | Iteration *3* |
 | :--: | :--: | :--: |
 | ![go2.1](output/griechenland/gierig/optimierer/8/813/karten/001.png) | ![go2.2](output/griechenland/gierig/optimierer/8/813/karten/002.png) | ![go2.3](output/griechenland/gierig/optimierer/8/813/karten/003.png) |
-| $Loss \approx 11,405$ | $Loss \approx 2,518$ | $Loss=0$ |
+| *Loss ≈ 11,405* | *Loss ≈ 2,518* | *Loss=0* |
 
 ## Lauf
 
