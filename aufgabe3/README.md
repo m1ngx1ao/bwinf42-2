@@ -31,20 +31,32 @@ Es ergibt sich die folgende *Ablauflogik*:
 
 ``` mermaid
 graph TD
-	S[Starte mit leerem Plan] --> L
-	L[Lauf-Iteration LI: \n Füge Ortschaft dem letzten zulässigen Plan hinzu] --> LL{Loss = 0?}
-	LL -- ja --> L
-	LL -- nein --> I
-	I[Optimierer-Iteration OI: \n Generiere Planvarianten \n und wähle die beste aus] --> IL{Loss = 0?}
-	IL -- ja --> L
-	IL -- nein --> ILB{#OI < Budget?}
-	ILB -- ja --> I
-	ILB -- nein --> LB{#LI < Budget?}
-	LB -- ja --> L
-	LB -- nein --> ZB{#Zentren \n < Budget?}
-	ZB -- ja --> Z[Füge Zentrum dem letzten \n zulässigen Plan hinzu]
-	Z --> L
-	ZB -- nein --> E[Ende]
+	subgraph Lauf
+		LaufIter[Lauf-Iteration LI: \n Füge Ortschaft dem letzten zulässigen Plan hinzu]
+		LaufIterLoss{Loss = 0?}
+		LaufInBudget{#LI < Budget?}
+		LaufZentrumDazu[Füge Zentrum dem letzten \n zulässigen Plan hinzu]
+		LaufZentrumInBudget{#Zentren \n < Budget?}
+	end
+	subgraph Optimierer
+		OptIter[Optimierer-Iteration OI: \n Generiere Planvarianten \n und wähle die beste aus]
+		OptIterLoss{Loss = 0?}
+		OptInBudget{#OI < Budget?}
+	end
+	S[Starte mit leerem Plan] --> LaufIter
+	LaufIter --> LaufIterLoss
+	LaufIterLoss -- ja --> LaufIter
+	LaufIterLoss -- nein --> OptIter
+	OptIter --> OptIterLoss
+	OptIterLoss -- ja --> LaufIter
+	OptIterLoss -- nein --> OptInBudget
+	OptInBudget -- ja --> OptIter
+	OptInBudget -- nein --> LaufInBudget
+	LaufInBudget -- ja --> LaufIter
+	LaufInBudget -- nein --> LaufZentrumInBudget
+	LaufZentrumInBudget -- ja --> LaufZentrumDazu
+	LaufZentrumDazu --> LaufIter
+	LaufZentrumInBudget -- nein --> E[Ende]
 ```
 
 Für die Komplexitätsbetrachtung sind zwei Aspekte von Interesse. Hierfür sei die Zahl der *Ortschaften* $n$, der *Gesundheitszentren* $z$ und diejenige der *Eckpunkte des Gebietspolygons* $g$:
@@ -65,10 +77,15 @@ Prinzipiell gibt es auch alternative Lösungsansätze, die hier nicht weiter ver
 
 Um die Abbildung zu vereinfachen, ist im UML Klassendiagramm Folgendes weggelassen:
 * Hole-Methoden: durch die Attributauflistung nicht zwingend erforderlich.
-* Override von Standard-Methoden (lt): im Modell standardmässig durchgeführt
-* Konstuktoren: nur aufgelistet, wenn ihre Parameter sich maßgeblich von den Attributen unterscheiden.
+* Inhalt des Files "types.py", da dieser nur TPunkt (siehe unten) enthaelt.
+* Override von Standard-Methoden (lt, str): im Modell standardmässig durchgeführt
+* Konstruktoren: nur aufgelistet, wenn ihre Parameter sich maßgeblich von den Attributen unterscheiden.
+* konstante Variablen, wie zum Beispiel im "Plotter" die Farben der gueltigen Ortschaften.
 
 Außerdem wird für den Typ einen Punkt `tuple[float, float]` ein spezifischer Typ `TPunkt` verwendet. Mit Punkt sind alle Modellpunkte gemeint, also Ortschaften, Gesundheitszentren und Polygonecken.
+`+/-` vor den Attributen bedeutet, dass das Attribut von außen nicht veränderbar ist, jedoch auf den Inhalt des Attributs durch die Hole-Methoden Zugriff hat.
+
+Die Unterklassen von Beobachter werden in einem separaten Schaubild dargestellt.
 
 ``` mermaid
 classDiagram
@@ -77,26 +94,78 @@ classDiagram
 		+sicher_abstand_ab : float
 		+schutz_zentrum_bis : float
 	}
+	class Gebiet {
+		+/-linienzug : list~TPunkt~
+		+/-eckpunkte : frozenset~TPunkt~
+		+/-name : str
+		+von_datei(datei_name) Gebiet$
+		+ist_drin(TPunkt)
+		+zufaelliger_punkt() TPunkt
+	}
 	class Besiedlungsplan {
-		-orte : frozenset[TPunkt]
-		-zentren : frozenset[TPunkt]
-		-geschuetzte_orte : frozenset[TPunkt]
-		-zunahe_orte : frozenset[TPunkt]
-		-loss : float
+		+/-orte : frozenset~TPunkt~
+		+/-zentren : frozenset~TPunkt~
+		+/-geschuetzte_orte : frozenset~TPunkt~
+		+/-zunahe_orte : frozenset~TPunkt~
+		+/-ausserhalb_gebiet_orte : frozenset~TPunkt~
+		+/-loss : float
+		-auswerte_gebiet()
 		-auswerte_ort_abstand()
-		-berechne_geschuetzte_orte(zentren: set[TPunkt], orte: set[TPunkt])
 		-berechne_abstand(TPunkt, TPunkt)
+		-berechne_ausserhalb_gebiet_orte(orte) set~TPunkt~
+		-berechne_geschuetzte_orte(zentren, orte) set~TPunkt~
 	}
 	Besiedlungsplan "*" --> "1" Parameter
+	Besiedlungsplan "*" --> "1" Gebiet
+
+	class GierigOptimierer {
+		-bewege_punkt(TPunkt, Besiedlungsplan) TPunkt
+		-erstelle_kandidat(Besiedlungsplan, *optionen) Besiedlungsplan
+		+tue() tuple~int, Besiedlungsplan~
+	}
+	GierigOptimierer --> "1" Besiedlungsplan : Start
+
+	class GierigLauf {
+		-budget_zentren: int
+		+tue()
+	}
+	GierigLauf "*" --> "1" Parameter
+	GierigLauf "*" --> "1" Gebiet
+    GierigLauf ..> GierigOptimierer
+	GierigLauf ..> Besiedlungsplan
+
 	class Beobachter {
 		<<Abstract>>
-		+finalisiere()
-		<<Abstract>>
-		+melde(Besiedlungsplan)
-		#vorbereite_output_file(lauf_name, file_name) str
-		#vorbereite_output_folder(lauf_name, folder_name) str
+		+optimierer_start(Besiedlungsplan, strategie: str) *
+		+optimierer_iteration(Besiedlungsplan) *
+		+optimierer_ende() *
+		+lauf_start(Besiedlungsplan, strategie: str) *
+		+lauf_loesung(Besiedlungsplan, benoetigte_iter_num) *
+		+lauf_ende(self) *
 	}
+	GierigOptimierer --> "*" Beobachter
+	GierigLauf --> "*" Beobachter
 	Beobachter ..> Besiedlungsplan
+```
+
+Die verschiedenen Unterklassen von Beobachter sind für die Verfolgung und Protokollierung des Laufs und Optimierers zuständig. Sie sind im folgenden Schaubild dargestellt.
+
+``` mermaid
+classDiagram
+	class Beobachter {
+		<<Abstract>>
+		+optimierer_start(Besiedlungsplan, strategie: str) *
+		+optimierer_iteration(Besiedlungsplan) *
+		+optimierer_ende() *
+		+lauf_start(Besiedlungsplan, strategie: str) *
+		+lauf_loesung(Besiedlungsplan, benoetigte_iter_num) *
+		+lauf_ende(self) *
+		-garantiere_kein_file(pfad: str)
+		-garantiere_leeren_folder(pfad: str)
+		-garantiere_folder(Besiedlungsplan, strategie: str, modul: str) str
+		#vorbereite_output_file(Besiedlungsplan, strategie: str, modul: str, file_name) str
+		#vorbereite_output_folder(Besiedlungsplan, strategie: str, modul: str, folder_name) str
+	}
 	class Trafo {
 		+min_x : float
 		+max_x : float
@@ -105,42 +174,31 @@ classDiagram
 		+zoom_x : float
 		+zoom_y : float
 		+rand: float
-		-Trafo(orte: frozenset[TPunkt], rand: float, breite: float, hoehe: float)
+		-Trafo(punkte: frozenset~TPunkt~, rand: float, breite: float, hoehe: float)
 	}
 	class Plotter {
 		-fenster : tk.Tk
 		-canvas : tk.Canvas
-		-iter_num : int
-		-pfad_name : str
+        -male(Besiedlungsplan)
         -male_zentren(Trafo, Besiedlungsplan)
         -male_orte(Trafo, Besiedlungsplan)
+		-male_gebiet(Trafo, Besiedlungsplan)
 		-speichere_canvas_to_file(lauf_name, iter_num)
 	}
     Plotter ..|> Beobachter
-    Plotter ..> Trafo : fuehrt aus
+    Plotter ..> Trafo
 	class Logger {
 		-iter_num : int
 		-f: TextIOWrapper
+		-ausgabe(str)
 	}
 	Logger ..|> Beobachter
 	class Stats {
 		_iter_num : int
 		-f: TextIOWrapper
+		-ausgabe(list~str | float | int~, ort: io.TextIOWrapper)
 	}
 	Stats ..|> Beobachter
-	class GierigLauf {
-		+tue()
-	}
-	class GierigOptimierer {
-		-budget_max_iter : int
-		-zahl_kandidaten : int
-		-bestimme_kandidat(Besiedlungsplan)
-		-bestimme_punkt(TPunkt)
-		+tue()
-	}
-    GierigLauf ..> GierigOptimierer : benutzt
-	GierigOptimierer --> "1" Besiedlungsplan
-	GierigOptimierer --> "*" Beobachter
 ```
 
 # Durchführung: Erstellung der Besiedlungspläne
@@ -195,7 +253,7 @@ Der Schwierigkeitsgrad der Optimierung steigt mit der Zahl der Ortschaften. Wenn
 
 ![ch-opiter-pro-orte](docs/opiter-pro-orte.svg)
 
-Wie erwartet steigt der Schwierigkeitsgrad *vor* Hinzunahme des Gesundheitszentrums. *Danach* ist er wieder minimal, außer wenn keine zusätzliche Abdeckung durch das Gesundheitszentrum erzielt werden kann. Außerdem lässt sich erkennen, dass der erhöhte Schwierigkeitgrad nicht abrupt einsetzt sondern sich kontinuierlich aufbaut. Dies ergibt sich daraus, dass die Wahrscheinlichkeit, eine zulässige Lösung ohne Hinzunahme eines weiteren Gesundheitszentrums zu finden, stetig abnimmt.
+Wie erwartet steigt der Schwierigkeitsgrad *vor* Hinzunahme des Gesundheitszentrums. *Danach* ist er wieder minimal, außer wenn keine zusätzliche Abdeckung durch das Gesundheitszentrum erzielt werden kann. Außerdem lässt sich erkennen, dass der erhöhte Schwierigkeitsgrad nicht abrupt einsetzt, sondern sich kontinuierlich aufbaut. Dies ergibt sich daraus, dass die Wahrscheinlichkeit, eine zulässige Lösung ohne Hinzunahme eines weiteren Gesundheitszentrums zu finden, stetig abnimmt.
 
 ## Zusätzliches Siedlungsgebiet
 
@@ -206,7 +264,7 @@ Die Laufzeit ist um den *Faktor* **21,6** länger als die längste Laufzeit der 
 * Gesundheitszentren ($z$): Faktor **3,0** (*9 statt 3*)
 * Gebietseckpunkte ($g$): Faktor **7,5** (*165* statt maximal *22*)
 
-Die folgende Tabelle hält den Zusammenhang fest zwischen der Zahl der verfügbaren Gesundheitszentren und der Anzahl der Ortschaften, die damit zulässig platziert werden können. Da das Siedlungsgebiet größer ist, tritt erst bei knapp *10* Gesundheitszentren eine Sättigung der möglichen Ortschaftszahl ein. Daher wurden auch mehr Werte als bei den vorgegebenen Siedlungsplänenen ermittelt.
+Die folgende Tabelle hält den Zusammenhang fest zwischen der Zahl der verfügbaren Gesundheitszentren und der Anzahl der Ortschaften, die damit zulässig platziert werden können. Da das Siedlungsgebiet größer ist, tritt erst bei knapp *10* Gesundheitszentren eine Sättigung der möglichen Ortschaftszahl ein. Daher wurden auch mehr Werte als bei den vorgegebenen Siedlungsplänen ermittelt.
 
 | # Gesundheits-<br>zentren | # Ortschaften <br> @ Griechisches Festland |
 | --: | --: |
@@ -230,7 +288,7 @@ Die zugehörigen Plankarten sind im Folgenden abgebildet.
 
 Aus den Plankarten lassen sich folgende Erkenntnisse gewinnen:
 * Die *konkaven* Elemente und der *stark zerklüftete* Küstenverlauf des Siedlungsgebiets werden durch den Lösungsansatz sehr gut *berücksichtigt*. Dies zeigt sich z.B. an der Ausnutzung der anspruchsvollen Halbinseln [Chalkidiki](https://de.wikipedia.org/wiki/Chalkidiki) und den [Peloponnes](https://de.wikipedia.org/wiki/Peloponnes).
-* Die größere Siedlungsfläche zeigt allerdings *Schwächen* bei der Platzierung der *Gesundheitszentren* auf. Werden diese initial *schlecht* platziert (z.B. in [Thrakien](https://de.wikipedia.org/wiki/Thrakien_(geographische_Region_Griechenlands)) statt in Zentralgriechenland), kann selbst die Punktbewegung der Optimierung dies *nur zum Teil* korrigieren und führt lediglich zu *lokalen Optima*. Dass diese überhaupt gefunden werden, liegt an der verfolgten Strategie bei der *Bewegung* der Gesundheitszentren. Immer *alle oder keine* zu bewegen, entfällt als Option, da sonst bei den bereits *gut platzierten* Gesundheitszentren sehr wahrscheinlich *Lücken* entstehen würden. Statt dessen berücksichtigt der Optimierer dedizierte Kandidaten, in denen nur genau ein zufälliges Gesundheitszentrum (und keine Ortschaft) bewegt wird.
+* Die größere Siedlungsfläche zeigt allerdings *Schwächen* bei der Platzierung der *Gesundheitszentren* auf. Werden diese initial *schlecht* platziert (z.B. in [Thrakien](https://de.wikipedia.org/wiki/Thrakien_(geographische_Region_Griechenlands)) statt in Zentralgriechenland), kann selbst die Punktbewegung der Optimierung dies *nur zum Teil* korrigieren und führt lediglich zu *lokalen Optima*. Dass diese gefunden werden, liegt an der verfolgten Strategie bei der *Bewegung* der Gesundheitszentren. Immer *alle oder keine* zu bewegen, entfällt als Option, da sonst bei den bereits *gut platzierten* Gesundheitszentren sehr wahrscheinlich *Lücken* entstehen würden. Stattdessen berücksichtigt der Optimierer dedizierte Kandidaten, in denen nur genau ein zufälliges Gesundheitszentrum (und keine Ortschaft) bewegt wird.
 
 Zum Abschluss kombiniert das folgende Schaubild für eine variable Anzahl von zulässig platzierten Ortschaften zwei Aspekte: Zum einen wird die Zahl der dafür benötigten Gesundheitszentren angegeben. Zum anderen wird der *Schwierigkeitsgrad* der Hinzunahme einer Ortschaft wie zuvor durch die Zahl der dafür notwendigen *Optimierer-Iterationen* genommen.
 
