@@ -7,15 +7,15 @@ class GierigOptimierer:
 	STRATEGIE = 'gierig'
 	MAX_RANDOM_BEWEGUNG = 10
 	"""
-	Die maximale Entfernung, die ein Punkt bei der Kandidaterstellung
+	Die maximale Entfernung, die ein Punkt bei der Kandidatenerstellung
 	verschoben werden kann - nach der Tschebyschew-Norm, also max(dx, dy)
 	"""
 
 	BUDGET_MAX_ITER = 100
 	BUDGET_MAX_ITER_OHNE_FORTSCHRITT = 10
 
-	ZAHL_KANDIDAT_PLAENE_BEWEGE_ALLE = 30
-	ZAHL_KANDIDAT_PLAENE_BEWEGE_UNGUELTIG_UND_ZENTREN = 20
+	ZAHL_KANDIDAT_PLAENE_BEWEGE_ZENTURM_ALLE_ORTE = 30
+	ZAHL_KANDIDAT_PLAENE_BEWEGE_ZENTRUM = 20
 	ZAHL_KANDIDAT_PLAENE_BEWEGE_UNGUELTIG = 10
 
 	def __init__(self, plan: Besiedlungsplan, beobachter: list[Beobachter]):
@@ -33,13 +33,13 @@ class GierigOptimierer:
 			iter_num += 1
 			iter_num_ohne_fortschritt += 1
 			kandidaten = {
-					self.__bewege_kandidat(plan, mit_zentrum=True, mit_gueltigen=True)
-					for _ in range(self.ZAHL_KANDIDAT_PLAENE_BEWEGE_ALLE)
+					self.__erstelle_kandidat(plan, mit_zentrum=True, mit_gueltigen=True)
+					for _ in range(self.ZAHL_KANDIDAT_PLAENE_BEWEGE_ZENTURM_ALLE_ORTE)
 				} | {
-					self.__bewege_kandidat(plan, mit_zentrum=True, mit_ungueltigen=False)
-					for _ in range(self.ZAHL_KANDIDAT_PLAENE_BEWEGE_UNGUELTIG_UND_ZENTREN)
+					self.__erstelle_kandidat(plan, mit_zentrum=True, mit_ungueltigen=False)
+					for _ in range(self.ZAHL_KANDIDAT_PLAENE_BEWEGE_ZENTRUM)
 				} | {
-					self.__bewege_kandidat(plan)
+					self.__erstelle_kandidat(plan)
 					for _ in range(self.ZAHL_KANDIDAT_PLAENE_BEWEGE_UNGUELTIG)
 				}
 			# gierige Wahl: Fahre mit Kandidaten fort, der geringsten Loss hat
@@ -53,7 +53,7 @@ class GierigOptimierer:
 			b.optimierer_ende()
 		return iter_num, plan
 
-	def __bewege_kandidat(self, plan: Besiedlungsplan, mit_zentrum: bool = False,
+	def __erstelle_kandidat(self, plan: Besiedlungsplan, mit_zentrum: bool = False,
 			mit_gueltigen: bool = False, mit_ungueltigen: bool = True) -> Besiedlungsplan:
 		orte = {
 			self.__bewege_punkt(o, plan)

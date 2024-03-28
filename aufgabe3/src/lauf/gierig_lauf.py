@@ -1,7 +1,5 @@
-from random import random
-
 from beobachter import Beobachter
-from modell import Besiedlungsplan, Gebiet, Parameter, TPunkt
+from modell import Besiedlungsplan, Gebiet, Parameter
 from optimierung import GierigOptimierer
 
 class GierigLauf:

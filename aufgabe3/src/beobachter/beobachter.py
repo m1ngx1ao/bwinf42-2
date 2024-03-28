@@ -50,11 +50,11 @@ class Beobachter(ABC):
 
 	# PRIVATE
 
-	def __garantiere_kein_file(self, pfad):
+	def __garantiere_kein_file(self, pfad: str):
 		if os.path.isfile(pfad):
 			os.remove(pfad)
 
-	def __garantiere_leeren_folder(self, pfad):
+	def __garantiere_leeren_folder(self, pfad: str):
 		if os.path.isdir(pfad):
 			shutil.rmtree(pfad)
 		os.mkdir(pfad)

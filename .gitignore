@@ -1,4 +1,5 @@
 .vscode/launch.json
-**/aufgabe1.pdf
+**/aufgabe*.pdf
 **/__pycache__
 .pytest_cache
+**/classes

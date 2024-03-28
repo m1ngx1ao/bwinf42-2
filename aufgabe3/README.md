@@ -15,7 +15,7 @@ Für *ein gegebenes Gebiet* und *den Mindestabständen zwischen Ortschaften* wer
 | 2 | 125 |
 | 3 | 127 |
 
-Das erste Gesundheitszentrum lohnt sich also, wenn seine Kosten den Nutzen $(107-43)=64$ zusätzlicher Ortschaften unterschreitet. Beim zweiten müssten die Kosten unter dem Nutzen $(125-107)=18$ zusätzlicher Ortschaften liegen. Und das dritte Gesundheitszentrum erlaubt nur $(127-125)=2$ weitere Ortschaften, seine Kosten übersteigen hier also wohl den Nutzen dieser beiden Ortschaften.
+Das erste Gesundheitszentrum lohnt sich also, wenn seine Kosten den Nutzen $(107-43)=64$ zusätzlicher Ortschaften unterschreiten. Beim zweiten müssten die Kosten unter dem Nutzen $(125-107)=18$ zusätzlicher Ortschaften liegen. Und das dritte Gesundheitszentrum erlaubt nur $(127-125)=2$ weitere Ortschaften, seine Kosten übersteigen hier also wohl den Nutzen dieser beiden Ortschaften.
 
 Während die ursprüngliche Aufgabestellung also nur eine Zeile der Tabelle fordert, wird die Aufgabenstellung so erweitert, dass nach der gesamten Tabelle gesucht wird.
 
@@ -83,7 +83,8 @@ Um die Abbildung zu vereinfachen, ist im UML Klassendiagramm Folgendes weggelass
 * konstante Variablen, wie zum Beispiel im "Plotter" die Farben der gueltigen Ortschaften.
 
 Außerdem wird für den Typ einen Punkt `tuple[float, float]` ein spezifischer Typ `TPunkt` verwendet. Mit Punkt sind alle Modellpunkte gemeint, also Ortschaften, Gesundheitszentren und Polygonecken.
-`+/-` vor den Attributen bedeutet, dass das Attribut von außen nicht veränderbar ist, jedoch auf den Inhalt des Attributs durch die Hole-Methoden Zugriff hat.
+
+`+/-` vor den Attributen bedeutet, dass das Attribut von außen nicht veränderbar ist, jedoch auf den Inhalt des Attributs durch die Hole-Methoden zugegriffen werden kann.
 
 Die Unterklassen von Beobachter werden in einem separaten Schaubild dargestellt.
 
@@ -211,13 +212,13 @@ Dafür wurde ein *sechstes* Gebiet erstellt und der Evaluationsreihe hinzugefüg
 | :--: |
 | Zusätzliches Siedlungsgebiet: Griechisches Festland als *165-Eck* im korrekten Maßstab *(km)*, <br> also mit einer Achsenlänge von *fast 600* |
 
-Für jedes Siedlungsgebiet wurde je ein Optimierungslauf auf einem Desktop PC mit dem *AMD FX8330* Prozessor durchgeführt. Dabei wurde Standard-Python im Terminal verwendet und auf Compilierung mit etwa *Cython* oder *PyPy* verzichtet. Die Dauer pro Lauf ist wie folgt:
+Für jedes Siedlungsgebiet wurde je ein Optimierungslauf auf einem Desktop PC mit dem *AMD FX8330* Prozessor durchgeführt. Dabei wurde Standard-Python im Terminal verwendet und auf Kompilierung mit etwa *Cython* oder *PyPy* verzichtet. Die Dauer pro Lauf ist wie folgt:
 
 | Gebiet | Siedler1 | Siedler2 | Siedler3 | Siedler4 | Siedler5 | Griechenland |
 | -- | --: | --: | --: | --: | --: | --: |
 | Dauer / min | 83 | 62 | 103 | 132 | 68 | 2851 |
 
-# Ergebnisse
+# Evaluation
 
 ## Vorgegebene Siedlungsgebiete
 
